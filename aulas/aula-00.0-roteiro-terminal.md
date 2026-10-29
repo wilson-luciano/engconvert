@@ -40,6 +40,30 @@ executar o EngConvert
 > 💡 Nesta Aula 00, o objetivo principal é **fazer**.  
 > Nas aulas seguintes, cada comando, pasta, arquivo e conceito será estudado com mais detalhes.
 
+### 👁️ Como visualizar este arquivo Markdown
+
+Os arquivos das aulas utilizam a extensão `.md`, isto é, são arquivos **Markdown**. No VSCode, podemos visualizar o texto e também sua apresentação formatada.
+
+Com o arquivo `.md` aberto, pressione:
+
+```text
+Ctrl + Shift + V
+```
+
+para abrir o **Markdown Preview**.
+
+Para visualizar a edição e o resultado lado a lado, utilize:
+
+```text
+Ctrl + K
+depois
+V
+```
+
+Também é possível clicar com o botão direito dentro do arquivo e escolher **Open Preview** ou **Open Preview to the Side**.
+
+> 💡 **Ideia-chave:** o arquivo `.md` continua sendo texto. O Preview apenas mostra como esse conteúdo será apresentado de forma formatada.
+
 ---
 
 ## 📦 Material inicial fornecido
@@ -58,10 +82,13 @@ engconvert/
 └── aulas/
     ├── aula-00-roteiro-terminal.md
     ├── aula-01.0-vscode-estrutura-ambiente.md
-│   ├── aula-01.1-roteiro-pratico.md
-    ├── aula-02.0-roadmap-sprint-gui.md
+    ├── aula-01.1-roteiro-pratico.md
+    ├── aula-02.0-gui-roadmap-sprints.md
+    ├── aula-02.1-roteiro-pratico.md
     ├── aula-03.0-widgets-eventos.md
+    ├── aula-03.1-roteiro-pratico.md
     ├── aula-04.0-primeiro-conversor.md
+    ├── aula-04.1-roteiro-pratico.md
     └── ...
 ```
 
@@ -190,7 +217,6 @@ Em ambos os casos, organizar corretamente as informações facilita o **desenvol
 
 ---
 
-
 ### 📚 Padrão de nomenclatura das aulas
 
 A partir da **Aula 01**, utilizaremos dois materiais complementares para cada etapa:
@@ -277,9 +303,13 @@ C:\
         └── aulas/
             ├── aula-00-roteiro-terminal.md
             ├── aula-01.0-vscode-estrutura-ambiente.md
-            ├── aula-02.0-roadmap-sprint-gui.md
+            ├── aula-01.1-roteiro-pratico.md
+            ├── aula-02.0-gui-roadmap-sprints.md
+            ├── aula-02.1-roteiro-pratico.md
             ├── aula-03.0-widgets-eventos.md
+            ├── aula-03.1-roteiro-pratico.md
             ├── aula-04.0-primeiro-conversor.md
+            ├── aula-04.1-roteiro-pratico.md
             └── ...
 ```
 
@@ -330,10 +360,10 @@ dir / ls     → O que existe nesta pasta?
 mkdir        → Quero criar uma pasta.
 ```
 
-- **`pwd`** (*Print Working Directory*) → mostra o diretório de trabalho atual.
-- **`cd`** (*Change Directory*) → permite entrar ou mudar de pasta.
+- **`pwd`** (_Print Working Directory_) → mostra o diretório de trabalho atual.
+- **`cd`** (_Change Directory_) → permite entrar ou mudar de pasta.
 - **`dir` / `ls`** → mostram os arquivos e pastas existentes no diretório atual.
-- **`mkdir`** (*Make Directory*) → cria uma nova pasta.
+- **`mkdir`** (_Make Directory_) → cria uma nova pasta.
 
 > 💡 Esses comandos ajudam a **localizar, navegar e visualizar** a estrutura do projeto diretamente pelo terminal.
 
@@ -574,7 +604,6 @@ New-Item docs\arquitetura.md -ItemType File
 Crie os arquivos iniciais das Sprints:
 
 ```powershell
-
 New-Item docs\sprints\sprint-00-ambiente.md -ItemType File
 New-Item docs\sprints\sprint-01-interface.md -ItemType File
 New-Item docs\sprints\sprint-02-widgets.md -ItemType File
@@ -744,9 +773,13 @@ engconvert/
 ├── aulas/
 │   ├── aula-00-roteiro-terminal.md
 │   ├── aula-01.0-vscode-estrutura-ambiente.md
-│   ├── aula-02.0-roadmap-sprint-gui.md
+│   ├── aula-01.1-roteiro-pratico.md
+│   ├── aula-02.0-gui-roadmap-sprints.md
+│   ├── aula-02.1-roteiro-pratico.md
 │   ├── aula-03.0-widgets-eventos.md
+│   ├── aula-03.1-roteiro-pratico.md
 │   ├── aula-04.0-primeiro-conversor.md
+│   ├── aula-04.1-roteiro-pratico.md
 │   └── ...
 │
 ├── docs/
@@ -799,6 +832,44 @@ py -0p
 ```
 
 > 💡 Esse comando é especialmente útil quando existem várias versões do Python instaladas.
+
+### 🐍 E se eu entrar no Python REPL sem querer?
+
+Se executarmos apenas:
+
+```powershell
+python
+```
+
+sem informar um arquivo, o Python poderá abrir seu modo interativo, chamado **REPL**. O terminal passa a apresentar:
+
+```text
+>>>
+```
+
+Nesse momento, estamos dentro do interpretador Python, e não no PowerShell.
+
+Para sair do REPL no Windows, digite:
+
+```python
+exit()
+```
+
+ou utilize:
+
+```text
+Ctrl + Z
+depois
+Enter
+```
+
+O prompt normal deverá reaparecer:
+
+```text
+PS C:\Projetos\engconvert>
+```
+
+> 🎯 **Regra prática:** se você esperava usar comandos como `cd`, `dir` ou `python main.py`, mas está vendo `>>>`, saia primeiro do REPL.
 
 Neste momento, não é necessário decorar todos esses comandos.
 
@@ -863,11 +934,40 @@ C:\Projetos\engconvert\.venv\Scripts\python.exe
 
 ### ⚠️ E se o PowerShell impedir a ativação?
 
-Em alguns computadores, o PowerShell pode impedir a execução do script por causa da política de execução do Windows.
+Em alguns computadores, o PowerShell pode impedir a execução do `Activate.ps1` por causa da **política de execução** (_Execution Policy_) do Windows.
 
-Especialmente em computadores institucionais, **não altere configurações de segurança sem autorização**.
+Pode aparecer uma mensagem informando que a execução de scripts está desabilitada.
 
-Uma alternativa é utilizar o Prompt de Comando (`cmd`) e executar:
+Em um **computador pessoal**, uma solução comum é permitir scripts locais para o usuário atual:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+O comando não mostra mensagem de sucesso, ele apenas executa e retorna ao prompt.
+
+Se o PowerShell solicitar confirmação, confirme a alteração. Depois, **feche e abra** novamente o terminal do VSCode e tente:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Nesse comando:
+
+```text
+CurrentUser
+    ↓
+alteração somente para o usuário atual
+
+RemoteSigned
+    ↓
+permite scripts locais e mantém restrições
+para scripts obtidos da Internet
+```
+
+> ⚠️ **Computadores institucionais ou de laboratório:** não altere políticas de segurança sem autorização. A configuração pode ser administrada pela instituição.
+
+Se a alteração não for permitida, utilize o **Prompt de Comando (`cmd`)**:
 
 ```bat
 .venv\Scripts\activate.bat
@@ -883,7 +983,168 @@ usar o Python específico do projeto
 
 ---
 
-# 16. Instalar o CustomTkinter
+## 15.1. Selecionar o interpretador Python no VSCode
+
+A ativação da `.venv` no terminal e a seleção do **interpretador do VSCode** são configurações relacionadas, mas diferentes. O terminal pode estar usando um Python enquanto o botão de execução utiliza outro.
+
+1. Com a pasta `C:\Projetos\engconvert` aberta no VSCode, pressione **Ctrl + Shift + P** para abrir a **Paleta de Comandos**.
+2. Pesquise **`Python: Select Interpreter`** (ou **Python: Selecionar Interpretador**) e pressione **Enter**.
+3. Escolha o interpretador localizado em **`C:\Projetos\engconvert\.venv\Scripts\python.exe`**. A identificação pode aparecer como `Python 3.12.x ('.venv')` ou de outra forma, conforme a versão e a extensão instalada.
+4. Abra o terminal integrado em **Terminal → New Terminal** ou use **Ctrl + `** (a tecla de acento grave, normalmente próxima de Esc).
+5. Confira os comandos:
+
+```powershell
+python --version
+python -c "import sys; print(sys.executable)"
+```
+
+O caminho exibido pelo segundo comando deve terminar em `engconvert\.venv\Scripts\python.exe`. **Não confie apenas no texto `(.venv)` do prompt:** ele ajuda a identificar a ativação, mas o caminho de `sys.executable` é uma verificação mais precisa.
+
+> **Regra didática:** um projeto → um ambiente virtual próprio → o interpretador correspondente selecionado no VSCode.
+
+## 15.2. Configurar o interpretador padrão do projeto
+
+Para que o VSCode encontre mais facilmente o Python correto ao reabrir o projeto, crie a pasta `.vscode` na raiz, caso ainda não exista:
+
+```powershell
+New-Item -ItemType Directory -Force .vscode
+```
+
+Dentro dela, crie ou abra o arquivo **`.vscode/settings.json`** e utilize:
+
+```json
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true
+}
+```
+
+**Importante:** o arquivo `settings.json` configura o VSCode, mas não instala o Python nem cria o ambiente virtual. Se o editor continuar utilizando outro interpretador, abra **Python: Select Interpreter (Python: Selecionar Interpretador)** e selecione o Python localizado em `.venv\Scripts\python.exe`.
+
+> Se `.vscode/settings.json` já existir, **não substitua indiscriminadamente** seu conteúdo: acrescente as duas propriedades ao objeto JSON existente, respeitando vírgulas e chaves.
+
+## 15.3. O botão Run não funciona ou usa outro Python?
+
+Quando `python main.py` funciona no terminal, mas a execução pelo botão **▶** falha, o VSCode pode estar utilizando um interpretador diferente. Também pode existir outro problema no código; por isso, confira primeiro o Python selecionado na Seção 15.1.
+
+Com o arquivo `main.py` aberto, clique na **seta para baixo (⌄), ao lado do botão ▶**, localizada no canto superior direito do editor do VSCode. Essa seta abre o menu com as opções disponíveis. **Escolha preferencialmente a primeira opção: Executar Arquivo do Python.**
+
+As opções exibidas no menu podem incluir:
+
+1. **Run Python File (Executar Arquivo do Python):** opção recomendada para executar `main.py` com o interpretador selecionado na extensão Python do VSCode.
+2. **Run Python File in Dedicated Terminal (Executar Arquivo Python no Terminal Dedicado):** executa o programa em um terminal dedicado ao Python; também pode ser utilizada no EngConvert.
+3. **Run Current File in Interactive Window (Executar Arquivo Atual na Janela Interativa):** executa o código na janela interativa, geralmente associada ao Jupyter. Não é necessária para nossa aplicação gráfica com CustomTkinter.
+4. **Run as Task (Executar como Tarefa):** permite executar tarefas configuradas no VSCode, por exemplo, por meio do arquivo `.vscode/tasks.json`. Não é necessária nesta etapa.
+5. **Python Debugger: Debug Python File (Depurar Arquivo Python):** inicia a depuração do arquivo para investigar erros e acompanhar sua execução.
+6. **Python Debugger: Debug using launch.json (Depurar usando launch.json):** inicia a depuração conforme uma configuração definida no arquivo `.vscode/launch.json`.
+
+> 📌 **Para esta aula:** utilize **Executar Arquivo do Python**, a primeira opção. As opções de janela interativa, tarefas e depuração serão úteis em outros contextos, mas não são necessárias para iniciar o EngConvert.
+
+### 🔎 Outros comandos que não aparecem necessariamente nesse menu
+
+- **Run Without Debugging (Executar sem Depuração):** normalmente acessível pelo menu **Executar → Executar sem Depuração** ou pelo atalho **Ctrl + F5**. Não é uma das opções mostradas na captura de tela do menu da seta.
+- **Run Code (Executar Código):** comando da extensão *Code Runner*, quando instalada. Pode utilizar um interpretador diferente do selecionado na extensão Python; por isso, evite essa opção nesta aula.
+
+> ⚠️ **Atenção:** o símbolo **▶** pode ser utilizado por diferentes comandos e extensões. Para abrir a lista mostrada, clique especificamente **na seta para baixo (⌄), ao lado do botão ▶**.
+
+Para verificar o interpretador utilizado pelo terminal, execute:
+
+```powershell
+python -c "import sys; print(sys.executable)"
+```
+
+Se houver dúvida, utilize o caminho explícito apresentado na próxima seção. **`python main.py` só utiliza a `.venv` quando o comando `python` do terminal aponta para ela**; digitar `python` não força automaticamente o uso desse ambiente.
+
+## 15.4. Executar sem ativar a `.venv` — alternativa útil
+
+Mesmo que o prompt mostre apenas `PS C:\Projetos\engconvert>`, é possível chamar diretamente o Python do ambiente virtual, sem executar `Activate.ps1`:
+
+```powershell
+.\.venv\Scripts\python.exe --version
+.\.venv\Scripts\python.exe main.py
+```
+
+Isso também ajuda em computadores de laboratório nos quais a política de execução impede a ativação por script. **O arquivo `main.py` receberá seu primeiro conteúdo na Seção 19; volte a este comando depois de criá-lo.**
+
+Outra opção, **após concluir a Seção 19**, é criar na raiz do projeto um arquivo **`run.ps1`** com o seguinte conteúdo completo:
+
+```powershell
+# Executa o EngConvert usando o Python da .venv do próprio projeto.
+$raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
+& (Join-Path $raiz '.venv\Scripts\python.exe') (Join-Path $raiz 'main.py')
+```
+
+Para executar, estando na raiz do projeto:
+
+```powershell
+.\run.ps1
+```
+
+O script utiliza caminhos relativos à sua própria localização, mesmo quando o terminal estiver em outra pasta. **Importante:** `run.ps1` também está sujeito à política de execução do PowerShell; portanto, não é uma solução para contornar bloqueios institucionais. Nesses casos, prefira o comando direto `.\.venv\Scripts\python.exe main.py` (sem o espaço inicial/final) ou solicite orientação ao responsável pelo laboratório.
+
+---
+
+# 16. Verificando e atualizando o `pip`
+
+Antes de instalar bibliotecas no ambiente virtual, vamos verificar se o `pip` está disponível.
+
+Com a `.venv` ativada, execute:
+
+```powershell
+python -m pip --version
+```
+
+Uma resposta semelhante a esta deverá aparecer:
+
+```text
+pip 25.x from C:\Projetos\engconvert\.venv\Lib\site-packages\pip
+```
+
+Observe que o caminho deve apontar para:
+
+```text
+engconvert\.venv
+```
+
+Isso indica que estamos utilizando o `pip` associado ao **Python do ambiente virtual do projeto**.
+
+## 16.1 Atualizando o `pip`
+
+Podemos atualizar o `pip` com:
+
+```powershell
+python -m pip install --upgrade pip
+```
+
+Depois, podemos verificar novamente:
+
+```powershell
+python -m pip --version
+```
+
+> 💡 Utilizamos `python -m pip` porque dessa forma o módulo `pip` é executado pelo mesmo interpretador chamado pelo comando `python`. Com a `.venv` ativa, isso ajuda a garantir que estamos trabalhando no ambiente virtual do projeto.
+
+O fluxo é:
+
+```text
+python
+   ↓
+Python da .venv
+   ↓
+-m pip
+   ↓
+pip da .venv
+   ↓
+instalação das bibliotecas
+```
+
+> 📌 **Importante:** verificar o `pip` faz parte da conferência do ambiente. A atualização é recomendável, mas não é uma condição obrigatória para instalar o CustomTkinter.
+
+Agora o ambiente está preparado para instalar a primeira biblioteca externa utilizada pelo EngConvert.
+
+---
+
+# 17. Instalar o CustomTkinter
 
 Com a `.venv` ativa:
 
@@ -901,7 +1162,7 @@ python -m pip show customtkinter
 
 ---
 
-# 17. Registrar as dependências
+# 18. Registrar as dependências
 
 Execute:
 
@@ -919,7 +1180,7 @@ O arquivo `requirements.txt` passa a registrar as dependências instaladas no am
 
 ---
 
-# 18. Criar o primeiro programa
+# 19. Criar o primeiro programa
 
 Abra:
 
@@ -937,7 +1198,7 @@ Salve o arquivo.
 
 ---
 
-# 19. Executar o EngConvert
+# 20. Executar o EngConvert
 
 No terminal:
 
@@ -955,7 +1216,7 @@ Temos agora o primeiro programa executável do projeto.
 
 ---
 
-# 20. Marco da Aula 00
+# 21. Marco da Aula 00
 
 Ao final deste roteiro devemos ter:
 
@@ -973,6 +1234,11 @@ Ao final deste roteiro devemos ter:
 - [ ] `.gitignore`;
 - [ ] `.venv` criada;
 - [ ] `.venv` ativada;
+- [ ] interpretador da `.venv` selecionado no VSCode;
+- [ ] `.vscode/settings.json` configurado;
+- [ ] alternativa de execução direta compreendida;
+- [ ] `pip` verificado;
+- [ ] `pip` atualizado, quando necessário;
 - [ ] CustomTkinter instalado;
 - [ ] dependências registradas;
 - [ ] primeiro programa executado.
@@ -1004,7 +1270,11 @@ main.py + README.md + requirements.txt + .gitignore
       ↓
 python -m venv .venv
       ↓
-ativar .venv
+ativar .venv e selecionar interpretador no VSCode
+      ↓
+python -m pip --version
+      ↓
+python -m pip install --upgrade pip
       ↓
 python -m pip install customtkinter
       ↓
@@ -1048,3 +1318,10 @@ Quando tivermos comportamentos que precisam ser verificados automaticamente, cri
 ---
 
 > 🎯 **Ideia-chave:** nesta Aula 00 preparamos o ambiente e começamos a construir o EngConvert a partir do material didático fornecido. A partir da Aula 01, compreenderemos com mais profundidade **por que cada pasta, arquivo, comando e ferramenta existe**.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>
