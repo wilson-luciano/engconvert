@@ -1,11 +1,12 @@
 # EngConvert
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/EngConvert_Escuro.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/EngConvert_Claro.png">
-    <img src="assets/EngConvert_Claro.png" alt="Logotipo do EngConvert" width="280">
-  </picture>
+  <img src="assets/EngConvert_Escuro.png#gh-dark-mode-only"
+       alt="EngConvert - Tema Escuro"
+       width="280">
+  <img src="assets/EngConvert_Claro.png#gh-light-mode-only"
+       alt="EngConvert - Tema Claro"
+       width="280">
 </p>
 
 
