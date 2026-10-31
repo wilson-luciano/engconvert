@@ -4,6 +4,7 @@
 **Projeto:** EngConvert — Conversor de Unidades de Engenharia  
 **Etapa 10:** Interface Completa  
 **Sprint 09:** Navegação, visibilidade e ordenação de categorias  
+**Status:** OFICIAL — CONGELADA v3  
 **Pré-requisitos:** Aulas 08.1, 09.1 e 10.0
 
 > Esta aula implementa **a primeira Sprint da Etapa 10**. As funcionalidades General, Custom, About e persistência JSON permanecem para as próximas Sprints, conforme o planejamento da Aula 10.0. Não confundir a conclusão desta aula com a conclusão de toda a Etapa 10.
@@ -12,7 +13,7 @@
 
 ## 1. Objetivos de aprendizagem
 
-Ao concluir, o aluno deverá ser capaz de criar uma interface com `CTkTabview`, selecionar grandezas, ocultar e reordenar categorias, restaurar a configuração padrão, manter os cálculos isolados da GUI, executar testes e registrar a evolução com Git.
+Ao concluir, o aluno deverá ser capaz de criar uma interface com `CTkTabview`, selecionar grandezas, ocultar e reordenar categorias, restaurar a configuração padrão, converter com o botão ou com Enter, manter os cálculos isolados da GUI, executar testes e registrar a evolução com Git.
 
 ## 2. Ponto de partida
 
@@ -95,6 +96,24 @@ Version: 0.1.0
 Location: C:\Projetos\engconvert\.venv\Lib\site-packages
 Editable project location: C:\Projetos\engconvert
 ```
+
+> **Observação didática — Por que pode aparecer `Version: 0.0.0`?**  
+> Se o comando `python -m pip show engconvert` mostrar `Version: 0.0.0`, isso pode indicar que, **no momento da instalação**, o `pyproject.toml` ainda não declarava a versão do projeto, ou que os metadados instalados não foram atualizados após uma alteração no arquivo. Essa saída, isoladamente, não comprova erro no código das conversões.  
+>
+> Para conferir a configuração atual, execute no PowerShell, na pasta do projeto:
+>
+> ```powershell
+> Get-Content .\pyproject.toml
+> ```
+>
+> Na seção `[project]`, confira se existe, por exemplo, `version = "0.1.0"`. **Não é necessário preencher os campos opcionais de autoria, e-mail ou site nesta aula.** Caso a versão tenha sido acrescentada ou corrigida após a instalação, atualize os metadados do ambiente virtual:
+>
+> ```powershell
+> python -m pip install -e .
+> python -m pip show engconvert
+> ```
+>
+> Se o arquivo declarar `version = "0.1.0"` e a reinstalação terminar com sucesso, a versão exibida deverá ser `0.1.0`. O campo `Summary` depende da descrição declarada; `Author` e `Home-page` podem continuar vazios sem impedir a execução. **Personalizar esses metadados é opcional e pode ser retomado na etapa de distribuição.**
 
 A linha **`Editable project location`** indica a pasta do projeto à qual a instalação editável está associada. Confirme se aponta para **a pasta correta do EngConvert**. A linha `Location` normalmente aponta para a pasta de pacotes do ambiente virtual, **não** para uma cópia integral dos arquivos-fonte.
 
@@ -303,6 +322,11 @@ Implementar uma interface de navegação com abas, permitindo selecionar, oculta
 - Permitir selecionar uma grandeza por meio das abas.
 - Criar a janela **Categorias**.
 - Permitir mostrar ou ocultar categorias.
+- Permitir marcar e desmarcar categorias favoritas.
+- Permitir alternar a aparência entre Sistema, Claro e Escuro.
+- Permitir ajustar a altura do painel de categorias com um divisor horizontal.
+- Adaptar a geometria inicial ao espaço disponível no monitor.
+- Exibir o resultado integralmente em um painel destacado.
 - Permitir alterar a ordem de apresentação.
 - Implementar os comandos **Subir**, **Descer**, **Restaurar**, **Salvar** e **Cancelar**.
 - Preservar as conversões existentes.
@@ -324,7 +348,13 @@ Implementar uma interface de navegação com abas, permitindo selecionar, oculta
 - [ ] Implementar a janela Categorias.
 - [ ] Implementar a visibilidade das categorias.
 - [ ] Implementar a ordenação das categorias.
+- [ ] Implementar a seleção de favoritos.
+- [ ] Implementar a escolha de aparência.
+- [ ] Implementar o divisor de altura ajustável e a geometria inicial compacta.
 - [ ] Implementar Restaurar, Salvar e Cancelar.
+- [ ] Permitir converter pressionando Enter e posicionar o foco no campo de valor.
+- [ ] Limpar o resultado anterior ao inverter as unidades.
+- [ ] Permitir rolagem na aba Todas as grandezas.
 
 ### Validação
 
@@ -334,6 +364,9 @@ Implementar uma interface de navegação com abas, permitindo selecionar, oculta
 - [ ] Impedir que todas as categorias sejam ocultadas.
 - [ ] Executar os testes com `pytest`.
 - [ ] Conferir manualmente a interface.
+- [ ] Testar Enter, inversão de unidades e rolagem da aba Todas as grandezas.
+- [ ] Confirmar que o resultado não fica cortado e que o divisor pode ser arrastado.
+- [ ] Confirmar que favoritos e tema funcionam durante a sessão.
 
 ### Git e documentação
 
@@ -348,10 +381,11 @@ A Sprint será considerada concluída quando:
 
 1. As abas estiverem funcionando corretamente.
 2. As cinco categorias originais permanecerem disponíveis no catálogo.
-3. A visibilidade e a ordenação funcionarem conforme planejado.
-4. As conversões matemáticas anteriores continuarem corretas.
-5. Os testes automatizados forem aprovados.
-6. As alterações estiverem registradas no Git.
+3. A visibilidade, os favoritos e a ordenação funcionarem conforme planejado.
+4. O resultado aparecer integralmente e o painel de categorias puder ser redimensionado.
+5. As conversões matemáticas anteriores continuarem corretas.
+6. Os testes automatizados forem aprovados.
+7. As alterações estiverem registradas no Git.
 
 ## 5. Limitações desta Sprint
 
@@ -449,6 +483,32 @@ O usuário não deve conseguir salvar uma navegação sem nenhuma grandeza. A in
 
 Depois de salvar, os botões das abas são reconstruídos com as categorias visíveis, na ordem escolhida. A seleção atual é preservada se ainda for válida; caso contrário, uma grandeza visível é selecionada e as unidades são atualizadas.
 
+## 17.1. Eventos de teclado, foco e consistência do resultado
+
+Além do clique no botão **Converter**, o aluno poderá pressionar **Enter** para executar a mesma função `ao_converter()`. O método `app.bind("<Return>", ...)` associa a tecla ao evento da janela principal, sem duplicar a regra de conversão. A função de retorno recebe um objeto `event`, mas o evento não precisa ser utilizado para calcular o resultado.
+
+O comando `entrada.focus_set()` coloca o foco no campo de valor quando a interface termina de ser montada. Assim, o usuário pode digitar e pressionar Enter sem precisar clicar primeiro no campo.
+
+Quando o usuário troca as unidades com **↔**, o resultado exibido anteriormente é limpo para não parecer que pertence à nova direção da conversão. A inversão **não** recalcula automaticamente: é preciso clicar em Converter ou pressionar Enter.
+
+Na aba **Todas as grandezas**, um `CTkScrollableFrame` permite visualizar todos os botões mesmo quando o espaço vertical é limitado. Essa alteração afeta somente a navegação, não os dados ou a matemática.
+
+**Teste importante:** o Enter deve executar a conversão na janela principal. Com a janela secundária **Categorias** aberta, confirme que a tecla não provoca uma conversão indevida. O foco e a captura de eventos podem variar conforme o widget ativo; por isso, a verificação manual faz parte da Sprint.
+
+## 17.2. Favoritos, aparência e campos de conversão
+
+A janela **Preferências — Categorias** apresenta um cabeçalho compacto com **↑↓ Categoria**, **★ Favorito** e **👁 Mostrar**. O círculo seleciona a categoria que será movida pelos botões Subir e Descer; a estrela determina quais aparecem na aba Favoritas; e Mostrar controla a visibilidade. As alterações são aplicadas por Salvar e descartadas por Cancelar.
+
+A interface inclui um ícone discreto no cabeçalho para alternar entre **Sistema**, **Claro** e **Escuro**. Os seletores de grandeza e unidades têm largura mais compacta e fonte ampliada. O campo numérico é centralizado. O resultado aparece em um painel destacado, com título e valor em fonte maior.
+
+## 17.3. Altura ajustável e janela compacta
+
+A área de categorias possui um **divisor horizontal arrastável**. Segure o divisor com o mouse e mova-o para cima ou para baixo para ajustar a altura do painel de navegação. O código impõe limites para preservar o espaço mínimo do conversor e impedir que o resultado desapareça.
+
+Na inicialização, a interface utiliza `winfo_screenwidth()` e `winfo_screenheight()` para escolher uma geometria inicial conservadora. Uma verificação adicional com `app.after(...)` corrige a altura após o Windows aplicar a decoração da janela e a escala de exibição. A intenção é evitar que a janela ultrapasse a área visível, sem exigir resolução fixa de monitor. O comportamento deve ser validado no computador do aluno.
+
+**Nesta Sprint 09 o redimensionamento é temporário:** a altura escolhida, o tema e as preferências de categorias não são gravados em arquivo. A persistência em JSON ficará para a **Aula 10.2**, quando será introduzido o módulo de configurações.
+
 ## 18. O que não será implementado nesta Sprint
 
 - precisão numérica configurável (`General`);
@@ -470,9 +530,11 @@ No VSCode, abra `src/engconvert/interface.py`. Faça uma cópia de segurança po
 ```python
 """Interface gráfica do EngConvert — Sprint 09: navegação e categorias.
 
-Mantém a matemática no módulo conversoes.py. Preferências persistentes e
+Mantém o cabeçalho compacto da janela Categorias (v6), a área de categorias
+redimensionável (v8) e a matemática no módulo conversoes.py. Preferências persistentes e
 cadastro de unidades serão implementados em Sprints posteriores.
 """
+import tkinter as tk
 import customtkinter as ctk
 from .dados import lista_grandezas
 from .conversoes import converter, obter_unidades
@@ -484,13 +546,23 @@ def iniciar_aplicacao():
     ctk.set_default_color_theme("blue")
     app = ctk.CTk()
     app.title("EngConvert — Sprint 09")
-    app.geometry("790x630")
-    app.minsize(660, 560)
+    # Geometria compacta: usa as dimensões do próprio Tk, evitando misturar
+    # coordenadas físicas do Windows (ctypes) com pixels lógicos do Tk.
+    # Reserva uma margem generosa para a barra de tarefas e escala de tela.
+    largura_tela = app.winfo_screenwidth()
+    altura_tela = app.winfo_screenheight()
+    largura_inicial = min(790, max(420, largura_tela - 60))
+    altura_inicial = min(620, max(420, altura_tela - 160))
+    pos_x = max(0, (largura_tela - largura_inicial) // 2)
+    pos_y = 20
+    app.geometry(f"{largura_inicial}x{altura_inicial}+{pos_x}+{pos_y}")
+    app.minsize(min(580, largura_inicial), min(520, altura_inicial))
 
     # Estado da navegação: somente preferências da sessão atual.
     ordem = list(lista_grandezas)
     visiveis = list(lista_grandezas)
     favoritas = ["Pressão", "Temperatura"]
+    colunas_grade = 3
 
     def categorias_disponiveis():
         return [nome for nome in ordem if nome in visiveis]
@@ -501,7 +573,7 @@ def iniciar_aplicacao():
         combo_para.configure(values=unidades)
         combo_de.set(unidades[0])
         combo_para.set(unidades[1] if len(unidades) > 1 else unidades[0])
-        resultado.configure(text="Resultado")
+        resultado.configure(text="—", text_color=("#1769aa", "#8ac7ff"))
 
     def selecionar_grandeza(nome):
         if nome not in categorias_disponiveis():
@@ -519,18 +591,28 @@ def iniciar_aplicacao():
         if combo_grandeza.get() not in disponiveis:
             combo_grandeza.set(disponiveis[0])
             atualizar_unidades()
-        for frame in (aba_favoritas, aba_todas):
-            for widget in frame.winfo_children():
+        for quadro in (quadro_favoritas, quadro_todas):
+            for widget in quadro.winfo_children():
                 widget.destroy()
+
+        def montar_grade(quadro, nomes):
+            for coluna in range(colunas_grade):
+                quadro.grid_columnconfigure(coluna, weight=1, uniform="categorias")
+            for indice, nome in enumerate(nomes):
+                linha, coluna = divmod(indice, colunas_grade)
+                ctk.CTkButton(
+                    quadro, text=nome, height=34,
+                    command=lambda n=nome: selecionar_grandeza(n)
+                ).grid(row=linha, column=coluna, padx=5, pady=5, sticky="ew")
+
         fav = [nome for nome in disponiveis if nome in favoritas]
         if not fav:
-            ctk.CTkLabel(aba_favoritas, text="Nenhuma favorita visível.").pack(pady=15)
-        for nome in fav:
-            ctk.CTkButton(aba_favoritas, text=nome,
-                          command=lambda n=nome: selecionar_grandeza(n)).pack(fill="x", padx=20, pady=5)
-        for nome in disponiveis:
-            ctk.CTkButton(aba_todas, text=nome,
-                          command=lambda n=nome: selecionar_grandeza(n)).pack(fill="x", padx=20, pady=4)
+            ctk.CTkLabel(quadro_favoritas, text="Nenhuma favorita visível.").grid(
+                row=0, column=0, padx=10, pady=15
+            )
+        else:
+            montar_grade(quadro_favoritas, fav)
+        montar_grade(quadro_todas, disponiveis)
 
     def abrir_categorias():
         janela = ctk.CTkToplevel(app)
@@ -540,26 +622,77 @@ def iniciar_aplicacao():
         # Cópias: cancelar fecha sem alterar o estado ativo.
         ordem_temp = list(ordem)
         visiveis_temp = list(visiveis)
+        favoritas_temp = list(favoritas)
         selecionada = ctk.StringVar(value=ordem_temp[0])
+        # Cabeçalho autoexplicativo: ordenação, favoritos e visibilidade.
+        # Dispensa os dois cartões de instruções e libera espaço vertical.
+        titulos = ctk.CTkFrame(janela, fg_color="transparent")
+        titulos.pack(fill="x", padx=22, pady=(12, 0))
+        titulos.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(
+            titulos, text="↑↓  Categoria", anchor="w",
+            font=ctk.CTkFont(size=13, weight="bold")
+        ).grid(row=0, column=0, sticky="w", padx=(4, 0))
+        ctk.CTkLabel(
+            titulos, text="★ Favorito", width=90,
+            font=ctk.CTkFont(size=12, weight="bold")
+        ).grid(row=0, column=1, padx=0)
+        ctk.CTkLabel(
+            titulos, text="👁 Mostrar", width=82,
+            font=ctk.CTkFont(size=12, weight="bold")
+        ).grid(row=0, column=2, padx=(0, 6))
         lista = ctk.CTkScrollableFrame(janela, height=300)
-        lista.pack(fill="both", expand=True, padx=18, pady=12)
+        lista.pack(fill="both", expand=True, padx=18, pady=(5, 12))
 
         def desenhar():
-            for w in lista.winfo_children():
-                w.destroy()
+            for widget in lista.winfo_children():
+                widget.destroy()
             for nome in ordem_temp:
-                linha = ctk.CTkFrame(lista, fg_color="transparent")
-                linha.pack(fill="x", pady=3)
-                ctk.CTkRadioButton(linha, text=nome, variable=selecionada,
-                                   value=nome).pack(side="left", padx=4)
-                marcado = ctk.BooleanVar(value=nome in visiveis_temp)
-                def alterar(valor, n=nome):
-                    if valor and n not in visiveis_temp:
-                        visiveis_temp.append(n)
-                    elif not valor and n in visiveis_temp:
-                        visiveis_temp.remove(n)
-                ctk.CTkCheckBox(linha, text="Mostrar", variable=marcado,
-                                command=lambda v=marcado, n=nome: alterar(v.get(), n)).pack(side="right")
+                linha = ctk.CTkFrame(lista, fg_color=("transparent"))
+                linha.pack(fill="x", pady=2)
+                linha.grid_columnconfigure(0, weight=1)
+
+                def destacar(n=nome):
+                    selecionada.set(n)
+                    desenhar()
+
+                ctk.CTkRadioButton(
+                    linha, text=nome, variable=selecionada, value=nome,
+                    command=destacar, width=150
+                ).grid(row=0, column=0, sticky="w", padx=(4, 2), pady=4)
+                if selecionada.get() == nome:
+                    linha.configure(fg_color=("#d6e9fa", "#264b69"))
+
+                mostrar_var = ctk.BooleanVar(value=nome in visiveis_temp)
+                favorito_var = ctk.BooleanVar(value=nome in favoritas_temp)
+
+                def alterar_mostrar(n=nome, v=mostrar_var):
+                    if v.get():
+                        if n not in visiveis_temp:
+                            visiveis_temp.append(n)
+                    else:
+                        if n in visiveis_temp:
+                            visiveis_temp.remove(n)
+                        if n in favoritas_temp:
+                            favoritas_temp.remove(n)
+                        desenhar()
+
+                def alterar_favorito(n=nome, v=favorito_var):
+                    if v.get() and n in visiveis_temp:
+                        if n not in favoritas_temp:
+                            favoritas_temp.append(n)
+                    elif n in favoritas_temp:
+                        favoritas_temp.remove(n)
+
+                ctk.CTkCheckBox(
+                    linha, text="", variable=favorito_var, width=28,
+                    state="normal" if nome in visiveis_temp else "disabled",
+                    command=alterar_favorito
+                ).grid(row=0, column=1, padx=(4, 34), sticky="e")
+                ctk.CTkCheckBox(
+                    linha, text="", variable=mostrar_var, width=28,
+                    command=alterar_mostrar
+                ).grid(row=0, column=2, padx=(0, 20), sticky="e")
 
         def mover(deslocamento):
             nome = selecionada.get()
@@ -572,6 +705,7 @@ def iniciar_aplicacao():
         def restaurar():
             ordem_temp[:] = lista_grandezas
             visiveis_temp[:] = lista_grandezas
+            favoritas_temp[:] = ["Pressão", "Temperatura"]
             selecionada.set(ordem_temp[0])
             desenhar()
 
@@ -581,6 +715,7 @@ def iniciar_aplicacao():
                 return
             ordem[:] = ordem_temp
             visiveis[:] = visiveis_temp
+            favoritas[:] = [n for n in favoritas_temp if n in visiveis_temp]
             atualizar_navegacao()
             janela.destroy()
 
@@ -602,45 +737,200 @@ def iniciar_aplicacao():
         de, para = combo_de.get(), combo_para.get()
         combo_de.set(para)
         combo_para.set(de)
+        # O resultado anterior pertence à direção de conversão antiga.
+        resultado.configure(text="—", text_color=("#1769aa", "#8ac7ff"))
 
     def ao_converter():
         try:
-            valor = float(entrada.get())
+            valor = float(entrada.get().strip().replace(",", "."))
             convertido = converter(valor, combo_grandeza.get(), combo_de.get(), combo_para.get())
-            resultado.configure(text=f"{convertido:.6g} {combo_para.get()}")
+            resultado.configure(text=f"{convertido:.6g} {combo_para.get()}", text_color=("#1769aa", "#8ac7ff"))
         except (ValueError, KeyError, ZeroDivisionError):
-            resultado.configure(text="Verifique o valor e as unidades selecionadas.")
+            resultado.configure(text="Verifique o valor e as unidades selecionadas.",
+                                text_color=("#b42318", "#ff9c94"))
 
     cabecalho = ctk.CTkFrame(app)
-    cabecalho.pack(fill="x", padx=22, pady=(18, 10))
-    ctk.CTkLabel(cabecalho, text="EngConvert", font=("Arial", 26, "bold")).pack(side="left", padx=15, pady=10)
-    ctk.CTkButton(cabecalho, text="⚙ Categorias", command=abrir_categorias).pack(side="right", padx=12)
+    cabecalho.pack(fill="x", padx=22, pady=(10, 7))
+    ctk.CTkLabel(cabecalho, text="EngConvert", font=("Arial", 26, "bold")).pack(
+        side="left", padx=15, pady=10
+    )
+    ctk.CTkButton(cabecalho, text="⚙ Categorias", command=abrir_categorias).pack(
+        side="right", padx=(5, 12)
+    )
 
-    abas = ctk.CTkTabview(app, height=195)
-    abas.pack(fill="x", padx=22, pady=6)
+    # Menu nativo, compacto, aberto ao clicar no ícone de aparência.
+    # A escolha vale somente para a sessão atual (sem persistência em JSON).
+    tema_atual = tk.StringVar(value="Sistema")
+    temas = {"Sistema": "System", "Claro": "Light", "Escuro": "Dark"}
+
+    def alterar_tema(escolha):
+        tema_atual.set(escolha)
+        ctk.set_appearance_mode(temas[escolha])
+
+    menu_tema = tk.Menu(app, tearoff=False)
+    for nome in ("Sistema", "Claro", "Escuro"):
+        menu_tema.add_radiobutton(
+            label=nome,
+            variable=tema_atual,
+            value=nome,
+            command=lambda n=nome: alterar_tema(n),
+        )
+
+    def abrir_menu_tema():
+        # Exibe o menu abaixo do botão, respeitando a posição na tela.
+        x = botao_tema.winfo_rootx()
+        y = botao_tema.winfo_rooty() + botao_tema.winfo_height()
+        try:
+            menu_tema.tk_popup(x, y)
+        finally:
+            menu_tema.grab_release()
+
+    botao_tema = ctk.CTkButton(
+        cabecalho, text="◐", width=36, height=32,
+        fg_color="transparent", text_color=("#333333", "#eeeeee"),
+        hover_color=("#c8c8c8", "#454545"),
+        command=abrir_menu_tema,
+    )
+    botao_tema.pack(side="right", padx=(4, 6))
+
+    # Sprint 09: altura ajustável da navegação, sem salvar em JSON.
+    # A persistência será implementada na Aula 10.2.
+    ALTURA_INICIAL = 125
+    ALTURA_MINIMA = 100
+    ALTURA_MAXIMA = 320
+    ALTURA_MINIMA_CONVERSOR = 350
+
+    painel_navegacao = ctk.CTkFrame(app, height=ALTURA_INICIAL)
+    painel_navegacao.pack(fill="x", padx=22, pady=(2, 0))
+    painel_navegacao.pack_propagate(False)
+
+    abas = ctk.CTkTabview(painel_navegacao)
+    abas.pack(fill="both", expand=True, padx=12, pady=(7, 5))
     aba_favoritas = abas.add("Favoritas")
     aba_todas = abas.add("Todas as grandezas")
+    quadro_favoritas = ctk.CTkScrollableFrame(aba_favoritas)
+    quadro_favoritas.pack(fill="both", expand=True, padx=4, pady=4)
+    quadro_todas = ctk.CTkScrollableFrame(aba_todas)
+    quadro_todas.pack(fill="both", expand=True, padx=4, pady=4)
+
+    # O divisor fica imediatamente abaixo do painel de categorias.
+    # Arrastar para cima libera espaço para o resultado da conversão.
+    divisor = ctk.CTkFrame(app, height=18, fg_color="transparent")
+    divisor.pack(fill="x", padx=22, pady=(0, 1))
+    divisor.pack_propagate(False)
+    pega = ctk.CTkLabel(
+        divisor, text="━━  arraste para ajustar a altura  ━━",
+        height=16, font=ctk.CTkFont(size=11),
+        text_color=("#687988", "#aab8c5")
+    )
+    pega.pack(fill="both", expand=True)
 
     corpo = ctk.CTkFrame(app)
-    corpo.pack(fill="both", expand=True, padx=22, pady=10)
-    ctk.CTkLabel(corpo, text="Grandeza").pack(pady=(15, 4))
-    combo_grandeza = ctk.CTkComboBox(corpo, values=ordem, width=330, command=atualizar_unidades, state="readonly")
+    corpo.pack(fill="both", expand=True, padx=22, pady=(0, 6))
+
+    arraste = {"inicio_y": 0, "altura_inicial": ALTURA_INICIAL}
+
+    def limite_altura():
+        # Calcula o espaço efetivamente disponível após a montagem da janela.
+        # Nunca permite que o divisor esconda o formulário e o resultado.
+        altura_total = app.winfo_height()
+        outros = (cabecalho.winfo_height() + divisor.winfo_height() + 36)
+        limite = altura_total - outros - ALTURA_MINIMA_CONVERSOR
+        return max(ALTURA_MINIMA, min(ALTURA_MAXIMA, limite))
+
+    def iniciar_arraste(event):
+        arraste["inicio_y"] = event.y_root
+        arraste["altura_inicial"] = painel_navegacao.winfo_height()
+
+    def mover_divisor(event):
+        nova = arraste["altura_inicial"] + event.y_root - arraste["inicio_y"]
+        nova = max(ALTURA_MINIMA, min(limite_altura(), nova))
+        painel_navegacao.configure(height=int(nova))
+
+    def ao_redimensionar(event):
+        if event.widget is app:
+            altura = painel_navegacao.winfo_height()
+            limite = limite_altura()
+            if altura > limite:
+                painel_navegacao.configure(height=limite)
+
+    for controle in (divisor, pega):
+        controle.bind("<ButtonPress-1>", iniciar_arraste)
+        controle.bind("<B1-Motion>", mover_divisor)
+    app.bind("<Configure>", ao_redimensionar, add="+")
+
+    ctk.CTkLabel(corpo, text="Grandeza", font=ctk.CTkFont(size=18, weight="bold")).pack(pady=(7, 3))
+    combo_grandeza = ctk.CTkComboBox(
+        corpo, values=ordem, width=270, height=40,
+        font=ctk.CTkFont(size=20), dropdown_font=ctk.CTkFont(size=17),
+        command=atualizar_unidades, state="readonly"
+    )
     combo_grandeza.pack()
     combo_grandeza.set("Pressão")
     linha = ctk.CTkFrame(corpo, fg_color="transparent")
-    linha.pack(pady=15)
-    combo_de = ctk.CTkComboBox(linha, width=190, state="readonly")
+    linha.pack(pady=6)
+    combo_de = ctk.CTkComboBox(
+        linha, width=155, height=40, state="readonly",
+        font=ctk.CTkFont(size=20), dropdown_font=ctk.CTkFont(size=17)
+    )
     combo_de.pack(side="left", padx=8)
-    ctk.CTkButton(linha, text="↔", width=46, command=inverter_unidades).pack(side="left", padx=4)
-    combo_para = ctk.CTkComboBox(linha, width=190, state="readonly")
+    ctk.CTkButton(
+        linha, text="↔", width=46, height=40,
+        font=ctk.CTkFont(size=21), command=inverter_unidades
+    ).pack(side="left", padx=4)
+    combo_para = ctk.CTkComboBox(
+        linha, width=155, height=40, state="readonly",
+        font=ctk.CTkFont(size=20), dropdown_font=ctk.CTkFont(size=17)
+    )
     combo_para.pack(side="left", padx=8)
-    entrada = ctk.CTkEntry(corpo, width=300, placeholder_text="Digite o valor")
-    entrada.pack(pady=5)
-    ctk.CTkButton(corpo, text="Converter", command=ao_converter).pack(pady=12)
-    resultado = ctk.CTkLabel(corpo, text="Resultado", font=("Arial", 19, "bold"))
-    resultado.pack(pady=5)
+    entrada = ctk.CTkEntry(
+        corpo, width=240, height=42, placeholder_text="Digite o valor",
+        font=ctk.CTkFont(size=21), justify="center"
+    )
+    entrada.pack(pady=3)
+    ctk.CTkButton(
+        corpo, text="Converter", width=175, height=40,
+        font=ctk.CTkFont(size=18), command=ao_converter
+    ).pack(pady=5)
+    painel_resultado = ctk.CTkFrame(
+        corpo, fg_color=("#e3f0fa", "#264b69"), corner_radius=10
+    )
+    painel_resultado.pack(fill="x", padx=24, pady=(2, 4))
+    ctk.CTkLabel(
+        painel_resultado, text="RESULTADO DA CONVERSÃO",
+        font=ctk.CTkFont(size=11, weight="bold"),
+        text_color=("#476a86", "#c4d8ec")
+    ).pack(pady=(5, 0))
+    resultado = ctk.CTkLabel(
+        painel_resultado, text="—", font=ctk.CTkFont(size=24, weight="bold"),
+        wraplength=520, text_color=("#1769aa", "#8ac7ff")
+    )
+    resultado.pack(pady=(0, 5))
     atualizar_unidades()
     atualizar_navegacao()
+
+    # Permite digitar o valor imediatamente ao abrir a aplicação.
+    entrada.focus_set()
+    # Enter e o botão Converter chamam a mesma função.
+    app.bind("<Return>", lambda event: ao_converter())
+
+    # Após o gerenciador de janelas aplicar DPI e decorações, verifica a
+    # geometria efetiva. Se necessário, reduz e reposiciona a janela.
+    def ajustar_apos_abrir():
+        app.update_idletasks()
+        margem_inferior = 100
+        limite_inferior = app.winfo_screenheight() - margem_inferior
+        topo = app.winfo_rooty()
+        altura = app.winfo_height()
+        if topo + altura > limite_inferior:
+            nova_altura = max(440, limite_inferior - topo - 12)
+            if nova_altura < altura:
+                app.geometry(f"{app.winfo_width()}x{nova_altura}+{app.winfo_x()}+{app.winfo_y()}")
+        # Em monitores menores, libera ainda mais espaço para o resultado.
+        if app.winfo_height() < 590:
+            painel_navegacao.configure(height=100)
+
+    app.after(150, ajustar_apos_abrir)
     app.mainloop()
 ```
 
@@ -804,7 +1094,9 @@ if __name__ == "__main__":
 
 ## 23. Arquivo completo — `pyproject.toml`
 
-O `pyproject.toml` foi introduzido na Aula 08.1 para descrever o projeto, suas dependências e a localização do pacote em `src/`. **Nesta Sprint não precisamos modificá-lo**, porque não alteramos a estrutura do pacote nem suas dependências. Ele é reproduzido para relacionar sua configuração à instalação editável explicada na Seção 3.
+Nesta etapa, utilizaremos a **versão mais completa dos metadados do projeto**, incluindo descrição, autor, licença MIT e endereço do repositório. A estrutura de pacote em `src/` e a dependência `customtkinter` permanecem as mesmas; não é preciso alterar `dados.py`, `conversoes.py` ou `main.py`.
+
+No VSCode, confira ou atualize `pyproject.toml` para o conteúdo abaixo. Os dados de autor e repositório são exemplos do projeto do professor; cada aluno poderá adaptá-los ao seu próprio repositório e autoria. A licença declarada pressupõe que o projeto tenha o arquivo `LICENSE` correspondente.
 
 ```toml
 [build-system]
@@ -814,13 +1106,24 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "engconvert"
 version = "0.1.0"
-description = "Conversor de unidades de engenharia"
+description = "Conversor de unidades de engenharia desenvolvido com Python e CustomTkinter"
 requires-python = ">=3.12"
-dependencies = ["customtkinter"]
+authors = [
+    { name = "Wilson Luciano" }
+]
+license = "MIT"
+dependencies = [
+    "customtkinter"
+]
+
+[project.urls]
+Repository = "https://github.com/wilson-luciano/engconvert"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 ```
+
+Após salvar, execute `python -m pip install -e .` para atualizar os metadados da instalação editável e confira com `python -m pip show engconvert`. O campo `Version` deverá indicar `0.1.0`, desde que a instalação seja feita no ambiente virtual correto.
 
 ## 24. Arquivo completo — `tests/test_conversoes.py`
 
@@ -915,6 +1218,29 @@ Confirme que aparecem as duas abas e o botão **Categorias**. Escolha Pressão, 
 2. Clique em **Cancelar**.
 3. Reabra a janela e confirme que Volume continua marcado.
 
+## 28.1. Exercício guiado — Converter com Enter
+
+1. Execute `python main.py` e confira que o cursor está no campo de valor.
+2. Digite `1`, selecione **Pressão**, **bar** e **kPa**, e pressione **Enter**.
+3. Confira o resultado `100 kPa`.
+4. Clique em **Converter** e confirme que o resultado continua correto.
+5. Clique em **↔** e confirme que o resultado anterior é apagado.
+6. Pressione **Enter** novamente e confira que a nova direção de conversão é aplicada.
+7. Abra **Categorias** e verifique que pressionar Enter nessa janela não dispara uma conversão indevida na janela principal.
+8. Na aba **Todas as grandezas**, confira que é possível alcançar todas as categorias usando a rolagem, inclusive com a escala de exibição do Windows aumentada.
+
+**Conceito:** clique e tecla são eventos diferentes que reutilizam a mesma função `ao_converter()`; não há duplicação do cálculo.
+
+## 28.2. Exercício guiado — favoritos, altura ajustável e aparência
+
+1. Execute `python main.py` e confirme que o resultado está inteiramente visível.
+2. Abra **Categorias**, marque uma categoria adicional como ★ Favorito e clique em **Salvar**; verifique sua presença na aba Favoritas.
+3. Arraste o divisor horizontal abaixo da área de categorias e confirme que o conversor continua acessível.
+4. Troque o tema pelo ícone de aparência e confirme a mudança imediata.
+5. Converta um valor com o botão e depois com Enter.
+6. Feche e reabra o programa. Nesta aula, a altura ajustada e as preferências ainda **não** serão restauradas; isso será implementado na Aula 10.2.
+7. Confira `python -m pip show engconvert` após `python -m pip install -e .` e verifique a versão `0.1.0`.
+
 ## 29. Testes de regressão
 
 ```powershell
@@ -927,8 +1253,18 @@ Os testes da Aula 09.1 devem continuar passando. Eles validam a matemática, mas
 
 - [ ] A janela abre sem exceções.
 - [ ] As abas Favoritas e Todas as grandezas aparecem.
+- [ ] Marcar ★ Favorito e clicar em Salvar atualiza a aba Favoritas.
+- [ ] O cabeçalho da janela Categorias mostra ↑↓ Categoria, ★ Favorito e 👁 Mostrar.
+- [ ] O seletor de aparência alterna entre Sistema, Claro e Escuro.
+- [ ] O divisor horizontal permite aumentar e diminuir a área de categorias.
+- [ ] O resultado completo aparece no painel destacado, sem cortes.
+- [ ] A janela abre inteiramente dentro da área visível do monitor, inclusive com a barra de tarefas.
 - [ ] Clicar numa grandeza atualiza as unidades.
-- [ ] O botão ↔ inverte as unidades.
+- [ ] O botão ↔ inverte as unidades e limpa o resultado anterior.
+- [ ] Enter executa a mesma conversão que o botão Converter.
+- [ ] O foco inicial permite digitar diretamente no campo de valor.
+- [ ] A aba Todas as grandezas permite rolar e acessar todos os botões.
+- [ ] Enter na janela Categorias não provoca conversão indevida.
 - [ ] Uma categoria oculta não aparece na navegação.
 - [ ] Restaurar recompõe a ordem original.
 - [ ] Cancelar descarta alterações.
@@ -941,8 +1277,8 @@ Os testes da Aula 09.1 devem continuar passando. Eles validam a matemática, mas
 ```bash
 git status
 git diff
-git add src/engconvert/interface.py docs/sprints/sprint-09-tabs.md
-git commit -m "feat: adiciona abas e organizacao de categorias"
+git add src/engconvert/interface.py pyproject.toml docs/sprints/sprint-09-tabs.md
+git commit -m "feat: aprimora navegacao e interface responsiva"
 ```
 
 ## 32. Validar e integrar
@@ -978,7 +1314,7 @@ Marque a **Sprint 09 — Tabs** como concluída apenas quando os critérios de a
 ```text
 Sprint 08: testes das conversões
           ↓
-Sprint 09: abas + navegação + categorias
+Sprint 09: abas + favoritos + temas + altura ajustável
           ↓
 próximas Sprints: General → Custom → About
           ↓
@@ -993,5 +1329,5 @@ Etapa 10 completa
 © 2026 <b>Wilson Luciano</b> ·
 Programação para Engenharia Mecânica · EngConvert ·
 Material didático ·
-Versão 1.0
+OFICIAL-CONGELADA-v3 — Sprint 09
 </sub>

@@ -5,9 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "engconvert"
 version = "0.1.0"
-description = "Conversor de unidades de engenharia"
+description = "Conversor de unidades de engenharia desenvolvido com Python e CustomTkinter"
 requires-python = ">=3.12"
-dependencies = ["customtkinter"]
+authors = [
+    { name = "Wilson Luciano" }
+]
+license = "MIT"
+dependencies = [
+    "customtkinter"
+]
+
+[project.urls]
+Repository = "https://github.com/wilson-luciano/engconvert"
 
 [tool.setuptools.packages.find]
 where = ["src"]
