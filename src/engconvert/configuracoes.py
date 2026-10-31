@@ -15,7 +15,7 @@ def caminho_configuracoes():
 
 
 def padrao():
-    return {'versao_esquema': 1, 'tema': 'System', 'precisao': 6,
+    return {'versao_esquema': 1, 'tema': 'System', 'idioma': 'pt', 'cor_botoes': 'Azul', 'precisao': 6,
             'cientifica': False, 'avisar_zero_absoluto': True,
             'ordem': ['Pressão', 'Comprimento', 'Área', 'Volume', 'Temperatura'],
             'visiveis': ['Pressão', 'Comprimento', 'Área', 'Volume', 'Temperatura'],
@@ -28,6 +28,10 @@ def validar(dados):
     resultado = padrao()
     if not isinstance(dados, dict):
         return resultado
+    if dados.get('idioma') in ('pt', 'en'):
+        resultado['idioma'] = dados['idioma']
+    if dados.get('cor_botoes') in ('Azul', 'Transparente', 'Cinza claro', 'Verde', 'Laranja', 'Vermelho', 'Roxo'):
+        resultado['cor_botoes'] = dados['cor_botoes']
     if dados.get('tema') in ('System', 'Light', 'Dark'):
         resultado['tema'] = dados['tema']
     if type(dados.get('precisao')) is int and 1 <= dados['precisao'] <= 12:
