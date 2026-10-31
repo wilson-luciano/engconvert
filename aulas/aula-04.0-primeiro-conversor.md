@@ -148,7 +148,7 @@ pressão [kPa] = pressão [bar] × 100
 Podemos representar matematicamente:
 
 \[
-p_{kPa} = p_{bar} \times 100
+p*{kPa} = p*{bar} \times 100
 \]
 
 Exemplo:
@@ -1131,7 +1131,6 @@ Na Aula 04.1 implementaremos e encerraremos essa Sprint.
 
 ---
 
-
 # 26. 🧪 Desafio de compreensão
 
 Considere:
@@ -1350,3 +1349,10 @@ Conversor de pressão
 ```
 
 > 🎯 **Ideia final:** o EngConvert deixa de apenas responder a eventos da interface e passa a interpretar dados, realizar um cálculo de engenharia, tratar entradas inadequadas e apresentar um resultado ao usuário.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

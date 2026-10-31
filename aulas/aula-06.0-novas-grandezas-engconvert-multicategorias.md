@@ -123,7 +123,6 @@ CONVERSOR MULTICATEGORIAS
 
 ---
 
-
 # 3. Grandeza física não é unidade
 
 Antes de alterar o programa, precisamos separar dois conceitos.
@@ -299,14 +298,14 @@ evoluir
 
 Para a categoria **Comprimento**, utilizaremos inicialmente:
 
-| Unidade | Símbolo |
-|---|---|
-| milímetro | `mm` |
-| centímetro | `cm` |
-| metro | `m` |
-| quilômetro | `km` |
-| polegada | `in` |
-| pé | `ft` |
+| Unidade    | Símbolo |
+| ---------- | ------- |
+| milímetro  | `mm`    |
+| centímetro | `cm`    |
+| metro      | `m`     |
+| quilômetro | `km`    |
+| polegada   | `in`    |
+| pé         | `ft`    |
 
 Podemos utilizar o metro como unidade de referência:
 
@@ -382,13 +381,13 @@ A próxima categoria será:
 
 Unidades iniciais:
 
-| Unidade | Símbolo |
-|---|---|
-| milímetro quadrado | `mm²` |
-| centímetro quadrado | `cm²` |
-| metro quadrado | `m²` |
-| polegada quadrada | `in²` |
-| pé quadrado | `ft²` |
+| Unidade             | Símbolo |
+| ------------------- | ------- |
+| milímetro quadrado  | `mm²`   |
+| centímetro quadrado | `cm²`   |
+| metro quadrado      | `m²`    |
+| polegada quadrada   | `in²`   |
+| pé quadrado         | `ft²`   |
 
 Utilizaremos:
 
@@ -478,16 +477,16 @@ A categoria **Volume** será especialmente interessante porque possui unidades m
 
 Utilizaremos inicialmente:
 
-| Unidade | Símbolo |
-|---|---|
-| mililitro | `mL` |
-| centímetro cúbico | `cm³` |
-| litro | `L` |
-| metro cúbico | `m³` |
-| polegada cúbica | `in³` |
-| pé cúbico | `ft³` |
-| galão americano | `gal (US)` |
-| galão imperial | `gal (UK)` |
+| Unidade           | Símbolo    |
+| ----------------- | ---------- |
+| mililitro         | `mL`       |
+| centímetro cúbico | `cm³`      |
+| litro             | `L`        |
+| metro cúbico      | `m³`       |
+| polegada cúbica   | `in³`      |
+| pé cúbico         | `ft³`      |
+| galão americano   | `gal (US)` |
+| galão imperial    | `gal (UK)` |
 
 A unidade de referência será:
 
@@ -744,12 +743,12 @@ Portanto:
 
 Nesta etapa utilizaremos:
 
-| Unidade | Símbolo |
-|---|---|
-| grau Celsius | `°C` |
-| grau Fahrenheit | `°F` |
-| kelvin | `K` |
-| grau Rankine | `°R` |
+| Unidade         | Símbolo |
+| --------------- | ------- |
+| grau Celsius    | `°C`    |
+| grau Fahrenheit | `°F`    |
+| kelvin          | `K`     |
+| grau Rankine    | `°R`    |
 
 Observe os símbolos utilizados:
 
@@ -1606,7 +1605,6 @@ A atualização automática poderá ser estudada posteriormente.
 
 ---
 
-
 # 42. O EngConvert começa a ter arquitetura
 
 Nas primeiras aulas, o programa era pequeno.
@@ -2271,3 +2269,10 @@ Etapa 6 — Novas Grandezas
 ```
 
 > 🎯 **Ideia final:** o objetivo da Etapa 6 não é apenas acrescentar mais unidades. É transformar o EngConvert em um aplicativo capaz de compreender diferentes grandezas, apresentar as unidades correspondentes e selecionar a estratégia matemática adequada para realizar cada conversão.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

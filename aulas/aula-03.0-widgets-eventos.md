@@ -742,3 +742,10 @@ Primeiro conversor
 ```
 
 > 🎯 **Ideia final:** uma interface gráfica é construída por widgets, mas ganha comportamento quando eventos são associados a funções capazes de processar informações e atualizar a própria interface.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

@@ -954,3 +954,10 @@ PRIMEIRO CONVERSOR
 ```
 
 > 🎯 **Ideia-chave:** nesta aula percorremos pela primeira vez o ciclo completo de uma Sprint planejada antes da implementação: definimos anteriormente o que seria construído, implementamos as tarefas, testamos o resultado e registramos sua conclusão.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

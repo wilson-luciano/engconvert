@@ -3480,3 +3480,10 @@ primeira janela do EngConvert
 Na próxima aula, avançaremos a partir da janela que já construímos.
 
 Vamos relacionar o desenvolvimento ao **Roadmap e aos Sprints** e continuar a evolução da interface gráfica do EngConvert de forma incremental.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

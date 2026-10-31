@@ -2348,3 +2348,10 @@ Novas grandezas
 ```
 
 > 🎯 **Ideia final:** nesta Sprint, o EngConvert deixou de possuir uma conversão fixa e passou a utilizar um conjunto de dados e um algoritmo genérico para converter múltiplas unidades de pressão. A interface também evoluiu, permitindo ao usuário escolher as unidades de origem e destino e invertê-las quando necessário.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

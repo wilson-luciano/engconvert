@@ -87,7 +87,7 @@ Nesta etapa utilizaremos efetivamente `roadmap.md` e `sprints/`.
 
 Abra `docs/roadmap.md` e utilize:
 
-`````markdown
+```markdown
 # Roadmap — EngConvert
 
 ## Engineering Unit Converter
@@ -118,7 +118,7 @@ O Roadmap poderá ser atualizado conforme o projeto evoluir e novas necessidades
 As etapas de preparação do ambiente e criação da primeira interface gráfica foram concluídas.
 
 A próxima etapa será dedicada à introdução de widgets e eventos na interface do EngConvert.
-`````
+```
 
 Salve com `Ctrl + S`.
 
@@ -178,7 +178,7 @@ nome_do_arquivo.md
 
 Abra `docs/sprints/sprint-00-ambiente.md` e utilize:
 
-````markdown
+```markdown
 # Sprint 00 — Preparação do Ambiente
 
 ## Objetivo
@@ -207,7 +207,7 @@ Sprint concluída. O projeto possui estrutura inicial, ambiente virtual, depend�
 ## Status
 
 **CONCLUÍDA**
-````
+```
 
 Salve o arquivo.
 
@@ -272,7 +272,7 @@ Durante a Aula 03, à medida que essas tarefas forem realizadas, elas poderão s
 
 Abra `docs/sprints/sprint-02-widgets.md` e utilize:
 
-````markdown
+```markdown
 # Sprint 02 — Widgets e Interação
 
 ## Objetivo
@@ -299,7 +299,7 @@ A preencher após a implementação.
 ## Status
 
 **PLANEJADA**
-````
+```
 
 Salve o arquivo.
 
@@ -509,3 +509,10 @@ implementar widgets e eventos
 ```
 
 > 🎯 **Ideia-chave:** desenvolver software não significa apenas escrever código. Planejar, documentar o que foi realizado e definir claramente o próximo incremento também fazem parte do desenvolvimento de um projeto.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

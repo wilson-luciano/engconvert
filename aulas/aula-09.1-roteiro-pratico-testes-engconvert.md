@@ -4,14 +4,14 @@
 **Projeto:** EngConvert — Conversor de Unidades de Engenharia  
 **Etapa 9:** Testes de Software  
 **Sprint 08:** Testes automatizados com pytest  
-**Situação:** EM REVISÃO — v1  
-**Base:** arquivos **efetivos** da Aula 08.1  
+**Base:** arquivos **efetivos** da Aula 08.1
 
 ---
 
 > **Orientação:** executar os comandos no terminal integrado do VSCode, dentro de `C:\Projetos\engconvert`, com `.venv` ativo. O projeto entregue na Aula 08.1 é a fonte dos módulos; nesta aula não substituímos as funções originais por exemplos inventados.
 
 ---
+
 ## 1. Objetivo da Sprint 08
 
 Criar testes automatizados com `pytest` para **os arquivos efetivos da Aula 08.1**. Não reescrever `conversoes.py`, `dados.py`, `interface.py` nem `main.py`. A alteração nesta etapa será a inclusão de testes e documentação, preservando a aplicação funcional.
@@ -110,9 +110,11 @@ Crie `docs/sprints/sprint-08-testes.md` com objetivo, tarefas e critérios de co
 # Sprint 08 — Testes automatizados
 
 ## Objetivo
+
 Validar as conversões do EngConvert com pytest.
 
 ## Tarefas
+
 - [ ] Instalar pytest
 - [ ] Criar tests/test_conversoes.py
 - [ ] Executar casos parametrizados
@@ -122,6 +124,7 @@ Validar as conversões do EngConvert com pytest.
 - [ ] Fazer commits e merge
 
 ## Status
+
 Em andamento
 ```
 
@@ -429,4 +432,9 @@ Nesta Sprint aprendemos a escrever testes reproduzíveis, parametrizar casos, co
 
 ---
 
-<sub>© 2026 Wilson Luciano · Programação para Engenharia Mecânica · EngConvert · Aula 09.1 · Em revisão v1</sub>
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

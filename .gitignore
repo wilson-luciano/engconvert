@@ -1,13 +1,23 @@
-# Ambiente virtual
+# Ambientes virtuais
 .venv/
 venv/
 
-# Cache do Python
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
 
-# Variáveis de ambiente e segredos
+# Testes e caches
+.pytest_cache/
+
+# Arquivos de configuração locais
 .env
+.env.*
+!.env.example
 
-# Logs
+# Arquivos gerados
+.vscode/
+build/
+dist/
+*.spec
 *.log

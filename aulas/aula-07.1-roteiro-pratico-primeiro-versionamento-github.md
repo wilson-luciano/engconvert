@@ -157,7 +157,7 @@ sprint-06-git-github.md
 
 Utilize:
 
-````markdown
+```markdown
 # Sprint 06 — Primeiro Versionamento e Publicação
 
 ## Objetivo
@@ -185,7 +185,7 @@ Colocar o EngConvert sob controle de versão com Git e publicar o repositório n
 ## Status
 
 **PLANEJADA**
-````
+```
 
 ---
 
@@ -1182,11 +1182,11 @@ README.md
 
 Se ele já possui conteúdo, acrescente uma seção simples, adequada ao estado atual do projeto:
 
-````markdown
+```markdown
 ## Controle de versão
 
 Este projeto utiliza Git para controle de versão e GitHub como repositório remoto.
-````
+```
 
 Salve:
 
@@ -2359,3 +2359,10 @@ Modularização
 ```
 
 > 🎯 **Ideia final:** a partir desta aula, o EngConvert não será apenas desenvolvido. Sua evolução também será **registrada, identificada e sincronizada**. Git e GitHub passam a fazer parte do fluxo de trabalho das próximas etapas do projeto.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

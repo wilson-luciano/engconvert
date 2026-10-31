@@ -1,4 +1,5 @@
 # Aula 01.1 — Roteiro Prático
+
 ## Da configuração do VSCode à primeira GUI do EngConvert
 
 > **Projeto-guia:** EngConvert — Engineering Unit Converter
@@ -12,7 +13,6 @@ Este roteiro reúne **somente as novas ações práticas da Aula 01**.
 A preparação inicial do projeto, a criação da `.venv`, a instalação do CustomTkinter, a criação dos arquivos e diretórios e o registro inicial das dependências **já foram realizados na Aula 00** e, portanto, **não serão repetidos aqui**.
 
 A **Aula 01** permanece como material completo de estudo e consulta. A **Aula 01.1** funciona como um roteiro direto para acompanhar a implementação prática.
-
 
 > 🧑‍💻 **Padrão didático adotado:** a partir desta aula, sempre que introduzirmos um trecho novo de programação, procuraremos apresentar comentários com `#` explicando as instruções, os objetos e os parâmetros mais importantes. À medida que os conceitos se tornarem familiares, alguns comentários poderão ser reduzidos para manter o código legível.
 
@@ -334,3 +334,10 @@ Este roteiro registrou apenas os **novos passos práticos necessários para conc
 ## ➡️ Próxima etapa
 
 Na **Aula 02**, continuaremos a evolução do EngConvert a partir desta primeira janela, relacionando o desenvolvimento ao **Roadmap e aos Sprints** e avançando na construção da interface gráfica.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

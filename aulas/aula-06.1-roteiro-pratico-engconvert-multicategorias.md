@@ -2248,3 +2248,10 @@ Modularização
 ```
 
 > 🎯 **Ideia final:** o EngConvert deixou de ser um conversor de uma única grandeza e passou a reconhecer diferentes categorias, atualizar suas unidades dinamicamente e aplicar a estratégia de conversão adequada a cada tipo de problema.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engconvert"
+version = "0.1.0"
+description = "Conversor de unidades de engenharia"
+requires-python = ">=3.12"
+dependencies = ["customtkinter"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

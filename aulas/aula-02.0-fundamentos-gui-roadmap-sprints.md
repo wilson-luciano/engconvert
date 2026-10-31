@@ -1229,3 +1229,10 @@ EVOLUÇÃO DO ENGCONVERT
 ---
 
 > 🎯 **Ideia final:** antes de aumentar a interface, precisamos compreender a tecnologia que estamos utilizando e saber qual será o próximo passo do projeto.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

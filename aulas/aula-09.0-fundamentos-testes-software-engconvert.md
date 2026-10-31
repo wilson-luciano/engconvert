@@ -3,7 +3,6 @@
 **Disciplina:** Programação para Engenharia Mecânica  
 **Projeto:** EngConvert — Conversor de Unidades de Engenharia  
 **Etapa 9:** Testes de Software  
-**Situação:** EM REVISÃO — v1  
 **Continuidade:** Aulas 08.0 e 08.1 — Modularização
 
 ---
@@ -888,4 +887,9 @@ A Aula 09.1 partirá dos arquivos **efetivos** da Aula 08.1, preservando os nome
 
 ---
 
-<sub>© 2026 Wilson Luciano · Programação para Engenharia Mecânica · EngConvert · Aula 09.0 · Versão em revisão 1</sub>
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

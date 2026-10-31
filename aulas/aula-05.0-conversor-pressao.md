@@ -2547,3 +2547,10 @@ Novas grandezas
 ```
 
 > 🎯 **Ideia final:** o EngConvert deixa de possuir uma única fórmula fixa e passa a utilizar dados estruturados, seleção de unidades e uma estratégia de conversão por unidade de referência. Com isso, o mesmo algoritmo passa a atender diversas combinações de pressão sem a necessidade de escrever uma fórmula específica para cada par de unidades.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

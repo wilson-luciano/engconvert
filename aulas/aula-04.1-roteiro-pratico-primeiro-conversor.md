@@ -165,7 +165,7 @@ docs/sprints/sprint-03-primeiro-conversor.md
 
 e utilize:
 
-````markdown
+```markdown
 # Sprint 03 — Primeiro Conversor
 
 ## Objetivo
@@ -195,7 +195,7 @@ A preencher após a implementação.
 ## Status
 
 **PLANEJADA**
-````
+```
 
 Salve o arquivo.
 
@@ -992,7 +992,7 @@ docs/sprints/sprint-03-primeiro-conversor.md
 
 Agora atualize o documento para:
 
-````markdown
+```markdown
 # Sprint 03 — Primeiro Conversor
 
 ## Objetivo
@@ -1024,7 +1024,7 @@ A aplicação também trata entradas que não possam ser convertidas para númer
 ## Status
 
 **CONCLUÍDA**
-````
+```
 
 Salve o arquivo.
 
@@ -1300,3 +1300,10 @@ CONVERSOR DE PRESSÃO
 ```
 
 > 🎯 **Ideia-chave:** nesta aula o EngConvert deixou de apenas responder à interface e passou a interpretar uma entrada, realizar um cálculo real de engenharia, tratar uma entrada inadequada e apresentar o resultado ao usuário.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>

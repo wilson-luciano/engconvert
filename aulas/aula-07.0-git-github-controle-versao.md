@@ -294,11 +294,11 @@ Terminal / PowerShell / Git Bash
 
 Em resumo:
 
-| Tecnologia | Função |
-|---|---|
-| Terminal | Interface para executar comandos |
-| Git | Sistema de controle de versão |
-| GitHub | Plataforma on-line para hospedar e colaborar em repositórios Git |
+| Tecnologia | Função                                                           |
+| ---------- | ---------------------------------------------------------------- |
+| Terminal   | Interface para executar comandos                                 |
+| Git        | Sistema de controle de versão                                    |
+| GitHub     | Plataforma on-line para hospedar e colaborar em repositórios Git |
 
 > 📌 **Git pode existir sem GitHub. GitHub utiliza Git.**
 
@@ -1949,12 +1949,12 @@ Se o editor for o **Vim**, o aluno pode achar que o terminal travou.
 
 Comandos mínimos:
 
-| Ação | Comando |
-|---|---|
-| Entrar no modo de edição | `i` |
-| Sair do modo de edição | `Esc` |
-| Salvar e sair | `:wq` + `Enter` |
-| Sair sem salvar | `:q!` + `Enter` |
+| Ação                     | Comando         |
+| ------------------------ | --------------- |
+| Entrar no modo de edição | `i`             |
+| Sair do modo de edição   | `Esc`           |
+| Salvar e sair            | `:wq` + `Enter` |
+| Sair sem salvar          | `:q!` + `Enter` |
 
 Não faremos um curso de Vim.
 
@@ -2457,21 +2457,21 @@ Mas lembre:
 
 # 88. Vocabulário essencial
 
-| Termo | Significado didático |
-|---|---|
-| Repository | Projeto controlado pelo Git |
-| Working Directory | Arquivos em edição |
-| Staging Area | Alterações preparadas para o próximo commit |
-| Commit | Registro de uma versão no histórico |
-| Branch | Linha de desenvolvimento |
-| Merge | Integração entre linhas de desenvolvimento |
-| Remote | Referência para um repositório remoto |
-| Origin | Nome convencional do remoto principal |
-| Push | Enviar commits ao remoto |
-| Pull | Buscar e integrar alterações remotas |
-| Fetch | Buscar informações sem integrar automaticamente |
-| Clone | Copiar um repositório remoto para a máquina |
-| `.gitignore` | Regras de arquivos/pastas que o Git deve ignorar |
+| Termo             | Significado didático                             |
+| ----------------- | ------------------------------------------------ |
+| Repository        | Projeto controlado pelo Git                      |
+| Working Directory | Arquivos em edição                               |
+| Staging Area      | Alterações preparadas para o próximo commit      |
+| Commit            | Registro de uma versão no histórico              |
+| Branch            | Linha de desenvolvimento                         |
+| Merge             | Integração entre linhas de desenvolvimento       |
+| Remote            | Referência para um repositório remoto            |
+| Origin            | Nome convencional do remoto principal            |
+| Push              | Enviar commits ao remoto                         |
+| Pull              | Buscar e integrar alterações remotas             |
+| Fetch             | Buscar informações sem integrar automaticamente  |
+| Clone             | Copiar um repositório remoto para a máquina      |
+| `.gitignore`      | Regras de arquivos/pastas que o Git deve ignorar |
 
 ---
 
@@ -2972,3 +2972,10 @@ https://docs.github.com/
 ```
 
 > 📌 Interfaces, nomes de botões e telas de cadastro/autenticação podem mudar. Os conceitos de Git apresentados nesta aula permanecem a referência para compreender o fluxo.
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>
