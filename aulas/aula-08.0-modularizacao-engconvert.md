@@ -657,7 +657,7 @@ Historicamente, `__init__.py` identifica diretórios tratados como pacotes regul
 
 Mesmo que Python moderno também suporte **namespace packages** sem esse arquivo em determinados cenários, utilizaremos `__init__.py` porque torna a intenção explícita e é apropriado para nossa estrutura didática.
 
-Inicialmente ele poderá ficar vazio.
+No EngConvert, o arquivo poderá conter somente a docstring `"""Pacote principal do EngConvert."""`, sem lógica de conversão.
 
 ---
 
@@ -1273,16 +1273,18 @@ unidades
 fatores de conversão
 ```
 
-Conceitualmente:
+Conceitualmente, o dicionário já existente no `main.py` associa cada grandeza aos fatores correspondentes:
 
 ```python
-GRANDEZAS = {
-    "Pressão": {...},
-    "Comprimento": {...},
-    "Área": {...},
-    "Volume": {...},
+grandezas = {
+    "Pressão": fatores_pressao,
+    "Comprimento": fatores_comprimento,
+    "Área": fatores_area,
+    "Volume": fatores_volume
 }
 ```
+
+As definições completas dos fatores serão copiadas na Aula 08.1; não se trata de um novo dicionário a ser criado.
 
 O objetivo de `dados.py` é responder:
 
@@ -1293,24 +1295,13 @@ DE CONVERSÃO EXISTEM?
 
 ---
 
-# 37. Por que nomes em maiúsculas?
+# 37. Convenções de nomes: minúsculas e constantes
 
-Em Python, uma convenção comum é utilizar nomes em maiúsculas para valores tratados como constantes:
+Em Python, nomes em maiúsculas (por exemplo, `PI` ou `GRAVIDADE`) são utilizados, por convenção, para valores que não se pretende modificar durante a execução. Essa convenção não torna automaticamente um objeto imutável.
 
-```python
-GRANDEZAS
-```
+No **EngConvert**, entretanto, o dicionário real já se chama `grandezas`, em minúsculas, assim como `fatores_pressao`, `fatores_comprimento`, `fatores_area` e `fatores_volume`.
 
-Isso não torna o dicionário fisicamente imutável.
-
-É uma convenção para comunicar:
-
-```text
-este valor representa
-uma configuração/dado
-que não pretendemos alterar
-durante o uso normal
-```
+**Preservaremos esses nomes na refatoração.** A modularização altera a organização do código, não exige renomear variáveis nem modificar os valores das unidades.
 
 ---
 
@@ -1715,7 +1706,7 @@ Dentro de uma estrutura de pacote, podemos utilizar importações explícitas a 
 Exemplo:
 
 ```python
-from engconvert.dados import GRANDEZAS
+from engconvert.dados import grandezas
 ```
 
 Isso é uma importação absoluta em relação ao pacote disponível no ambiente.
@@ -1734,7 +1725,7 @@ o objeto está vindo
 Dentro do próprio pacote também podemos encontrar:
 
 ```python
-from .dados import GRANDEZAS
+from .dados import grandezas
 ```
 
 O ponto:
@@ -1752,13 +1743,13 @@ pacote atual
 Assim:
 
 ```python
-from .dados import GRANDEZAS
+from .dados import grandezas
 ```
 
 pode ser lido como:
 
 ```text
-importe GRANDEZAS
+importe grandezas
 do módulo dados
 deste pacote
 ```
@@ -2162,7 +2153,7 @@ Em `conversoes.py`:
 
 ```python
 def converter(valor, grandeza, unidade_de, unidade_para):
-    if grandeza not in GRANDEZAS:
+    if grandeza not in grandezas:
         raise ValueError("Grandeza inválida.")
 
     ...
@@ -2187,7 +2178,7 @@ Assim cada módulo mantém sua responsabilidade.
 O dicionário:
 
 ```python
-GRANDEZAS
+grandezas
 ```
 
 não precisa estar misturado ao código que cria:
@@ -2407,12 +2398,12 @@ Sim. Ao longo da evolução do desenvolvimento de software surgiram diferentes m
 
 Alguns exemplos são:
 
-| Padrão/arquitetura | Ideia central |
-|---|---|
-| **MVC** | separa Modelo, Visão e Controlador |
-| **MVP** | utiliza um Presenter para intermediar a interface e a lógica |
-| **MVVM** | utiliza um ViewModel entre a interface e os dados/lógica |
-| **Clean Architecture** | procura separar regras de negócio das tecnologias externas |
+| Padrão/arquitetura         | Ideia central                                                          |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **MVC**                    | separa Modelo, Visão e Controlador                                     |
+| **MVP**                    | utiliza um Presenter para intermediar a interface e a lógica           |
+| **MVVM**                   | utiliza um ViewModel entre a interface e os dados/lógica               |
+| **Clean Architecture**     | procura separar regras de negócio das tecnologias externas             |
 | **Hexagonal Architecture** | procura isolar o núcleo da aplicação de interfaces e sistemas externos |
 
 Não precisamos estudar esses padrões profundamente neste momento.
@@ -3050,20 +3041,20 @@ Antes da Aula 08.1, confirme se você consegue explicar:
 
 # 99. Vocabulário essencial
 
-| Termo | Significado didático |
-|---|---|
-| Modularização | Divisão do programa em partes organizadas |
-| Módulo | Arquivo Python importável |
-| Pacote | Organização de módulos relacionados |
-| Refatoração | Melhoria interna sem intenção de mudar o comportamento externo |
-| Responsabilidade | Função principal de uma parte do sistema |
-| Coesão | Relação entre elementos de um mesmo módulo |
-| Acoplamento | Dependência entre partes do sistema |
-| Import | Mecanismo para utilizar código de outro módulo |
-| Entry point | Ponto de entrada da aplicação |
-| Regressão | Funcionalidade existente que deixa de funcionar após uma mudança |
-| Branch | Linha de desenvolvimento separada |
-| Merge | Integração das alterações de uma branch |
+| Termo            | Significado didático                                             |
+| ---------------- | ---------------------------------------------------------------- |
+| Modularização    | Divisão do programa em partes organizadas                        |
+| Módulo           | Arquivo Python importável                                        |
+| Pacote           | Organização de módulos relacionados                              |
+| Refatoração      | Melhoria interna sem intenção de mudar o comportamento externo   |
+| Responsabilidade | Função principal de uma parte do sistema                         |
+| Coesão           | Relação entre elementos de um mesmo módulo                       |
+| Acoplamento      | Dependência entre partes do sistema                              |
+| Import           | Mecanismo para utilizar código de outro módulo                   |
+| Entry point      | Ponto de entrada da aplicação                                    |
+| Regressão        | Funcionalidade existente que deixa de funcionar após uma mudança |
+| Branch           | Linha de desenvolvimento separada                                |
+| Merge            | Integração das alterações de uma branch                          |
 
 ---
 
@@ -3220,3 +3211,147 @@ Testes
 ```
 
 > 🎯 **Ideia final:** até agora aprendemos a construir o EngConvert. A partir desta etapa começamos a aprender algo igualmente importante: **como organizar um software para que ele continue compreensível à medida que cresce**.
+
+---
+
+# APÊNDICE — Fundamentos complementares para a Aula 08.1
+
+> **Orientação de estudo:** os conceitos básicos de módulos, importações, separação de responsabilidades, Git, testes e arquitetura já foram apresentados nas 103 seções anteriores. Este apêndice aprofunda apenas pontos necessários para compreender a implementação. **Não é um roteiro de comandos para executar agora.** O código integral e a sequência de trabalho estão na Aula 08.1.
+
+## A. Por que a temperatura exige uma regra própria?
+
+Pressão, comprimento, área e volume utilizam fatores em relação a uma unidade de referência. Uma conversão multiplicativa pode ser expressa como:
+
+```python
+def converter_por_fator(valor, fator_origem, fator_destino):
+    return valor * fator_origem / fator_destino
+```
+
+Já a temperatura pode exigir um deslocamento de escala, além de multiplicação. Por exemplo:
+
+```text
+°C → °F : multiplicar por 9/5 e somar 32
+°C → K  : somar 273,15
+```
+
+Por isso, `dados.py` armazena a lista `unidades_temperatura`, enquanto `conversoes.py` implementará a matemática específica. A lista de unidades não substitui as fórmulas.
+
+## B. Função geral de conversão e interface gráfica
+
+A função geral `converter(valor, grandeza, unidade_de, unidade_para)` decidirá entre a regra de temperatura e a regra multiplicativa. A interface, por sua vez, deverá coletar os dados digitados, chamar a função e apresentar o resultado.
+
+```text
+CTkEntry / CTkComboBox
+          ↓
+      interface.py
+          ↓
+      converter(...)
+          ↓
+      conversoes.py
+          ↓
+        dados.py
+```
+
+O nome `ao_converter` pode identificar o evento do botão, enquanto `converter` identifica a função matemática. Assim, evita-se misturar a ação de clicar com o cálculo de unidades.
+
+## C. Escopo dos widgets e funções de evento
+
+Ao reunir a construção da interface dentro de `iniciar_aplicacao()`, é preciso garantir que os eventos continuem acessando os widgets necessários. Uma solução simples é definir as funções de evento no escopo adequado, com acesso às referências utilizadas.
+
+**Não é necessário introduzir uma classe `EngConvertApp` apenas para modularizar os arquivos.** Orientação a objetos poderá ser estudada separadamente, quando houver necessidade real.
+
+## D. O papel de `pyproject.toml`
+
+O arquivo `pyproject.toml` declara informações de configuração, construção e empacotamento de um projeto Python. Na estrutura adotada pelo EngConvert, ele ajuda a informar que os módulos importáveis estão dentro de `src/`.
+
+Um exemplo de configuração é:
+
+```toml
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engconvert"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+```
+
+A versão mínima de Python declarada é uma escolha do projeto, não uma exigência universal do empacotamento.
+
+## E. Instalação editável e importações
+
+Na raiz do projeto, com o ambiente virtual ativo, a instalação em modo editável é realizada com:
+
+```powershell
+python -m pip install -e .
+```
+
+Nesse modo, o ambiente passa a reconhecer o pacote `engconvert`, enquanto os arquivos-fonte permanecem em `src/`. Alterações normais no código Python são refletidas sem reinstalar o pacote a cada edição; alterações em metadados ou dependências podem exigir nova instalação.
+
+Dentro do pacote, uma importação relativa adequada é:
+
+```python
+from .dados import grandezas
+```
+
+Já no ponto de entrada `main.py`, localizado na raiz do projeto, pode-se utilizar:
+
+```python
+from engconvert.interface import iniciar_aplicacao
+```
+
+Evite resolver problemas de importação com alterações improvisadas de `sys.path`. Antes, confira a estrutura de pastas, o ambiente ativo e a instalação editável.
+
+## F. Revisão e integração segura com Git
+
+Durante a modularização, os commits devem representar **etapas funcionais significativas**, não cada pequena linha alterada. O Git permite preparar apenas os arquivos relacionados à etapa:
+
+```powershell
+git add src/engconvert/conversoes.py src/engconvert/interface.py main.py pyproject.toml
+git --no-pager diff --cached --name-status
+```
+
+Esse exemplo é ilustrativo: antes de criar o commit, confira a lista real de arquivos preparados. **Evite `git add .` quando houver modificações locais de outras aulas ou documentos.**
+
+O comando abaixo permite comparar a branch de trabalho com a base da `main`:
+
+```powershell
+git --no-pager diff main...feature-modularizacao
+```
+
+A integração por `merge` só deve ocorrer depois da validação funcional e da conferência do estado do repositório. Caso apareçam conflitos, analise cada arquivo e preserve o trabalho existente; não utilize comandos destrutivos para forçar a integração.
+
+## G. Preparação para testes automatizados e integração contínua
+
+Uma regra de conversão independente de widgets pode ser chamada diretamente:
+
+```python
+resultado = converter(1, "Pressão", "bar", "kPa")
+```
+
+O resultado esperado é `100`. Na próxima etapa, essa verificação poderá ser automatizada com `pytest`, usando testes que comparem resultados reais com valores esperados.
+
+```text
+funções independentes da GUI
+            ↓
+      testes com pytest
+            ↓
+   detecção de regressões
+            ↓
+   futura integração contínua
+```
+
+A configuração de CI, como GitHub Actions, não faz parte desta Sprint. O ganho imediato é tornar as funções matemáticas mais fáceis de verificar e manter.
+
+---
+
+<sub>
+© 2026 <b>Wilson Luciano</b> ·
+Programação para Engenharia Mecânica · EngConvert ·
+Material didático ·
+Versão 1.0
+</sub>
