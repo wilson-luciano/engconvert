@@ -115,23 +115,34 @@ git --no-pager diff --stat origin/main
 
 Prepare apenas os arquivos desejados com `git add -- <caminho-do-arquivo>` e revise o conteúdo preparado antes de criar um commit. Consulte as Aulas 07.0 e 07.1 para o procedimento didático completo.
 
+## Downloads para Windows
+
+O EngConvert possui duas distribuições disponíveis na seção [Releases](https://github.com/wilson-luciano/engconvert/releases):
+
+| Versão | Finalidade | Download |
+| --- | --- | --- |
+| **EngConvert v0.1.0** | Versão didática, associada às aulas de Programação para Engenharia Mecânica. | [Release v0.1.0](https://github.com/wilson-luciano/engconvert/releases/tag/v0.1.0) |
+| **EngConvert Engineering Edition v1.0.0** | Versão ampliada, com mais de 30 categorias de conversão, personalização da interface e persistência de preferências. | [Release v1.0.0](https://github.com/wilson-luciano/engconvert/releases/tag/v1.0.0) |
+
+### Instalação
+
+1. Acesse a Release correspondente à versão desejada.
+2. Na seção **Assets**, baixe o arquivo ZIP para Windows:
+   - **v0.1.0:** `EngConvert-v0.1.0-Windows.zip`.
+   - **Engineering Edition v1.0.0:** `EngConvert-Engineering-v1.0.0-Windows.zip`.
+3. Extraia o ZIP para uma pasta de sua preferência.
+4. Execute o aplicativo correspondente:
+   - **v0.1.0:** `EngConvert.exe`.
+   - **Engineering Edition v1.0.0:** `EngConvert-Engineering.exe`.
+
+As distribuições utilizam executáveis para Windows e não exigem a instalação separada do Python. Os pacotes incluem a licença `LICENSE`.
+
+> **Importante:** este repositório contém o **código-fonte do projeto didático**. A Engineering Edition v1.0.0 está disponível aqui como **executável anexado à Release**. Os links automáticos **Source code (zip)** e **Source code (tar.gz)** gerados pelo GitHub correspondem ao código deste repositório, e não ao código-fonte da Engineering Edition.
+
+> Os executáveis são distribuídos sem instalador e podem apresentar avisos de reputação do Windows caso não estejam assinados digitalmente. Baixe-os apenas da página oficial de Releases.
+
 ---
 
 <sub>
 © 2026 **Wilson Luciano** · Programação para Engenharia Mecânica · EngConvert · Material didático
 </sub>
-
-## Download do EngConvert para Windows
-
-Acesse a seção **Releases** deste repositório e baixe o arquivo
-`EngConvert-v0.1.0-Windows.zip` da versão correspondente.
-
-1. Extraia **todo** o conteúdo do ZIP para uma pasta de sua preferência.
-2. Abra a pasta em que os arquivos foram extraídos.
-3. Execute `EngConvert.exe`.
-
-O ZIP da versão prioritária (`--onefile`) contém `EngConvert.exe` e `LICENSE` na raiz. Não há pasta `_internal` nem é necessário instalar Python separadamente. O programa foi desenvolvido em Python e CustomTkinter.
-
-O EngConvert é disponibilizado sob a licença MIT (consulte o arquivo `LICENSE` no repositório e no ZIP). As preferências são salvas na pasta de dados do usuário do Windows.
-
-> O executável é destinado ao Windows. Esta versão é distribuída sem instalador e pode exibir avisos de reputação do sistema caso não esteja assinada digitalmente. Verifique a procedência do download.
