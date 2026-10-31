@@ -15,7 +15,7 @@ Implementar preferências gerais do EngConvert e sua persistência em JSON, mant
 - Seleção de tema: Sistema, Claro e Escuro.
 - Precisão de exibição de 1 a 12 algarismos significativos.
 - Opção de notação científica.
-- Aviso para temperatura abaixo do zero absoluto.
+- Aviso para temperatura abaixo do zero absoluto, quando habilitado.
 - Persistência de tema, favoritos, ordem, visibilidade e dimensões da interface.
 - Gravação das preferências em pasta do usuário, fora do código-fonte.
 - Recuperação de valores padrão para configurações ausentes ou inválidas.
@@ -34,7 +34,7 @@ Implementar preferências gerais do EngConvert e sua persistência em JSON, mant
 - [ ] Implementar valores padrão e validação das preferências.
 - [ ] Implementar leitura e gravação de JSON.
 - [ ] Criar `tests/test_configuracoes.py`.
-- [ ] Executar e registrar os testes de configurações.
+- [ ] Executar e registrar o resultado dos testes de configurações.
 - [ ] Registrar em commit o módulo, os testes e este documento.
 
 ### Integração da interface — Parte III da Aula 10.2
@@ -44,9 +44,9 @@ Implementar preferências gerais do EngConvert e sua persistência em JSON, mant
 - [ ] Verificar precisão e notação científica.
 - [ ] Verificar o aviso de zero absoluto.
 - [ ] Verificar persistência de favoritos, ordem e visibilidade.
-- [ ] Verificar persistência das dimensões e altura ajustável.
+- [ ] Verificar persistência de dimensões e altura ajustável.
 - [ ] Fechar e reabrir o aplicativo para confirmar a persistência.
-- [ ] Confirmar que as funcionalidades da Sprint 09 foram preservadas.
+- [ ] Verificar que as funcionalidades da Sprint 09 foram preservadas.
 
 ## 4. Critérios de aceitação
 
