@@ -1,5 +1,14 @@
 # EngConvert
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/EngConvert_Escuro.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/EngConvert_Claro.png">
+    <img src="assets/EngConvert_Claro.png" alt="Logotipo do EngConvert" width="280">
+  </picture>
+</p>
+
+
 **Engineering Unit Converter**  
 Projeto didático da disciplina **Programação para Engenharia Mecânica**.
 
@@ -44,6 +53,7 @@ Consulte também o [`roadmap`](docs/roadmap.md) e a documentação das Sprints e
 
 ```text
 engconvert/
+├── assets/                # Imagens e ícones do aplicativo
 ├── aulas/                 # Material didático
 ├── docs/                  # Roadmap, Sprints e documentação
 ├── src/
@@ -109,3 +119,18 @@ Prepare apenas os arquivos desejados com `git add -- <caminho-do-arquivo>` e rev
 <sub>
 © 2026 **Wilson Luciano** · Programação para Engenharia Mecânica · EngConvert · Material didático
 </sub>
+
+## Download do EngConvert para Windows
+
+Acesse a seção **Releases** deste repositório e baixe o arquivo
+`EngConvert-v0.1.0-Windows.zip` da versão correspondente.
+
+1. Extraia **todo** o conteúdo do ZIP para uma pasta de sua preferência.
+2. Abra a pasta em que os arquivos foram extraídos.
+3. Execute `EngConvert.exe`.
+
+O ZIP da versão prioritária (`--onefile`) contém `EngConvert.exe` e `LICENSE` na raiz. Não há pasta `_internal` nem é necessário instalar Python separadamente. O programa foi desenvolvido em Python e CustomTkinter.
+
+O EngConvert é disponibilizado sob a licença MIT (consulte o arquivo `LICENSE` no repositório e no ZIP). As preferências são salvas na pasta de dados do usuário do Windows.
+
+> O executável é destinado ao Windows. Esta versão é distribuída sem instalador e pode exibir avisos de reputação do sistema caso não esteja assinada digitalmente. Verifique a procedência do download.

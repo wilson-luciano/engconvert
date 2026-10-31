@@ -3,11 +3,11 @@
 venv/
 
 # Python
-__pycache__/
 *.py[cod]
 *.egg-info/
 
 # Testes e caches
+__pycache__/
 .pytest_cache/
 
 # Arquivos de configuração locais
@@ -15,9 +15,17 @@ __pycache__/
 .env.*
 !.env.example
 
-# Arquivos gerados
-.vscode/
+# Saídas do PyInstaller
 build/
 dist/
-*.spec
+
+# Arquivos gerados
+.vscode/
 *.log
+
+# Preferências pessoais
+configuracoes.json
+unidades_personalizadas.json
+
+# Pacotes gerados para download
+EngConvert-v*-Windows.zip

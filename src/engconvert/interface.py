@@ -8,6 +8,10 @@ from .dados import lista_grandezas
 from . import configuracoes as cfg
 from . import personalizadas as pers
 
+import sys
+from pathlib import Path
+
+
 VERSAO = "0.1.0"
 
 # Identificadores estáveis em JSON; somente os textos visíveis são traduzidos.
@@ -57,6 +61,25 @@ TRADUCOES = {
 def formatar_numero(valor, preferencias):
     p = preferencias["precisao"]
     return f"{valor:.{p}e}" if preferencias["cientifica"] else f"{valor:.{p}g}"
+
+def caminho_icone(tema=None):
+    """Localiza o ícone da janela conforme o tema efetivo do CustomTkinter.
+
+    No tema Sistema, get_appearance_mode() informa se o Windows está
+    efetivamente em modo claro ou escuro.
+    """
+    if getattr(sys, "frozen", False):
+        raiz = Path(sys._MEIPASS)
+    else:
+        # interface.py está em src/engconvert; parents[2] é a raiz do projeto.
+        raiz = Path(__file__).resolve().parents[2]
+
+    modo = tema or ctk.get_appearance_mode()
+    nome = "engconvert-escuro.ico" if modo == "Dark" else "engconvert-claro.ico"
+    icone = raiz / "assets" / nome
+    if not icone.is_file():
+        icone = raiz / "assets" / "engconvert.ico"
+    return icone
 
 
 def iniciar_aplicacao():
@@ -209,6 +232,35 @@ def iniciar_aplicacao():
     ctk.set_default_color_theme("blue")
     reiniciar = {"necessario": False}
     app = ctk.CTk()
+    # A janela principal e Configurações gerais acompanham o tema.
+    # As demais janelas auxiliares mantêm sempre o ícone claro.
+    # O ícone incorporado ao executável pelo PyInstaller é independente.
+    def aplicar_icone(janela):
+        if not janela.winfo_exists():
+            return
+        icone = caminho_icone(None if janela is app or getattr(janela, "_icone_acompanha_tema", False) else "Light")
+        if icone.is_file():
+            try:
+                janela.iconbitmap(str(icone))
+            except tk.TclError:
+                pass  # Um arquivo ICO inválido não deve encerrar o programa.
+
+    def atualizar_icone_janela():
+        aplicar_icone(app)
+        for janela in app.winfo_children():
+            if isinstance(janela, ctk.CTkToplevel):
+                aplicar_icone(janela)
+
+    def criar_janela_auxiliar(acompanhar_tema=False):
+        janela = ctk.CTkToplevel(app)
+        janela._icone_acompanha_tema = acompanhar_tema
+        aplicar_icone(janela)
+        # CustomTkinter pode redefinir o ícone após criar a janela.
+        janela.after(300, lambda j=janela: aplicar_icone(j))
+        return janela
+
+    atualizar_icone_janela()
+    app.after(350, atualizar_icone_janela)
     app.title(f"EngConvert — v{VERSAO}")
     # Dimensão inicial padronizada da janela principal.
     # Não restaura dimensões antigas do JSON: uma janela maximizada ou
@@ -290,7 +342,7 @@ def iniciar_aplicacao():
         montar_grade(quadro_todas, disponiveis)
 
     def abrir_categorias():
-        janela = ctk.CTkToplevel(app)
+        janela = criar_janela_auxiliar()
         janela.title(t("Preferências — Categorias"))
         janela.geometry("470x520")
         janela.transient(app)
@@ -440,7 +492,7 @@ def iniciar_aplicacao():
 
 
     def abrir_general():
-        janela = ctk.CTkToplevel(app)
+        janela = criar_janela_auxiliar(acompanhar_tema=True)
         janela.title(t("Configurações gerais"))
         janela.geometry("440x580")
         janela.transient(app)
@@ -486,6 +538,8 @@ def iniciar_aplicacao():
                                 cor_botoes=cor_interna)
             if persistir():
                 ctk.set_appearance_mode(preferencias["tema"])
+                atualizar_icone_janela()
+                app.after(350, atualizar_icone_janela)
                 atualizar_paleta_completa()
                 janela.destroy()
                 if preferencias["idioma"] != idioma:
@@ -502,7 +556,7 @@ def iniciar_aplicacao():
 
     def abrir_custom():
         nonlocal unidades_custom
-        janela = ctk.CTkToplevel(app)
+        janela = criar_janela_auxiliar()
         janela.title(t("Unidades personalizadas"))
         janela.geometry("500x540")
         janela.transient(app)
@@ -563,7 +617,7 @@ def iniciar_aplicacao():
         janela.grab_set()
 
     def abrir_about():
-        janela = ctk.CTkToplevel(app)
+        janela = criar_janela_auxiliar()
         janela.title(t("Sobre o EngConvert"))
         janela.geometry("440x300")
         janela.transient(app)
